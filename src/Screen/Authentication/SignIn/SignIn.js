@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import axios from 'axios'
 
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login'
 
 import './../../../assets/scss/style.scss';
@@ -19,15 +19,27 @@ class SignUp extends React.Component {
         senha: ''
     }
 
-    responseFacebook = () => {}
-    responseGoogle = () => {}
+    responseFacebook = (response) => {
+        console.log(response)
+    }
+    responseGoogle = (response) => {
+        console.log(response)
+    }
 
     handleSubmit = async () => {
-        axios.post('http://localhost:21086/signin', {
+        axios.defaults.baseURL = 'http://peruibemelhor.nodejs7605.kinghost.net:21086/'
+
+        axios.post('signin', {
             email : this.state.email,
 	        password : this.state.senha
-        }).then(res => {
-            this.props.history.replace('/dashboard', null)
+        })
+        .then(res => {
+            if(res.data.retorno){
+                axios.defaults.headers.common = {'Authorization': `Bearer ${res.data.token}`}
+                this.props.navigation.navigate("/dashboard")
+            }else{
+                console.log(res.data.msg)
+            }
         }).catch(err => console.log(err))
     }
 
@@ -68,24 +80,20 @@ class SignUp extends React.Component {
                                 <div className="input-group mb-4" style={{WebkitJustifyContent: 'space-between'}}>
                                     <FacebookLogin
                                         appId="415441372420544"
-                                        fields="name, email, picture"
-                                        render={renderProps => (
-                                            <div className="btn shadow-2 md-6" style={{backgroundColor: '#1877f2', width: '48%'}}>
-                                                <i className="fa fa-facebook f-16" style={{color: 'white'}}/>
-                                                <label style={{color: 'white',  marginBottom: 0}}>Facebook</label>
-                                            </div>
-                                        )}
+                                        autoLoad
+                                        fields="name,email,picture"
+                                        cssClass="btn shadow-2 md-6"
+                                        icon={<i className="fa fa-facebook f-16" style={{color: 'white'}}/>}
+                                        textButton="Facebook"
+                                        onClick={()=>{}}
                                         callback={this.responseFacebook}
+                                        style={{backgroundColor: 'blue'}}
                                     />
                                     <GoogleLogin
                                         clientId="376063619992-9ojvonbnkn4hbtnv286i3kndk1a256so.apps.googleusercontent.com"
-                                        buttonText="Login com Google"
-                                        render={renderProps => (
-                                            <button className="btn shadow-2 md-6" style={{backgroundColor: '#f44236', width: '48%'}}>
-                                                <i className="fa fa-google-plus f-16" style={{color: 'white'}}/>
-                                                    <label style={{color: 'white', marginBottom: 0}}>Google</label>
-                                            </button>
-                                        )}
+                                        buttonText="Google"
+                                        cssClass="btn shadow-2 md-6"
+                                        icon={<i className="fa fa-google-plus f-16" style={{color: 'white'}}/>}
                                         onSuccess={this.responseGoogle}
                                         onFailure={this.responseGoogle}
                                     />
