@@ -1,5 +1,4 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
 import axios from 'axios'
 
 import FacebookLogin from 'react-facebook-login';
@@ -12,11 +11,13 @@ import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
 import logo from '../../../assets/images/logo.png';
 
 class SignUp extends React.Component {
-    constructor(props){super(props)}
+    constructor(props){
+        super(props)
+    }
 
     state = {
-        email: '',
-        senha: ''
+        email: 'archeros.devs@gmail.com',
+        senha: '123'
     }
 
     responseFacebook = (response) => {
@@ -27,7 +28,7 @@ class SignUp extends React.Component {
     }
 
     handleSubmit = async () => {
-        axios.defaults.baseURL = 'http://peruibemelhor.nodejs7605.kinghost.net:21086/'
+        axios.defaults.baseURL = 'http://localhost:21086/'
 
         axios.post('signin', {
             email : this.state.email,
@@ -36,7 +37,7 @@ class SignUp extends React.Component {
         .then(res => {
             if(res.data.retorno){
                 axios.defaults.headers.common = {'Authorization': `Bearer ${res.data.token}`}
-                this.props.navigation.navigate("/dashboard")
+                this.props.history.push('/dashboard')
             }else{
                 console.log(res.data.msg)
             }
@@ -55,7 +56,7 @@ class SignUp extends React.Component {
                             <span className="r s"/>
                             <span className="r"/>
                         </div>
-                        <form className="card" action="#" onSubmit={this.handleSubmit} >
+                        <div className="card" >
                             <div className="card-body text-center">
                                 <div className="mb-4">
                                     <img  style={{width: '200px'}} src={logo} alt="logo"/>
@@ -73,14 +74,14 @@ class SignUp extends React.Component {
                                         <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" />
                                             <label htmlFor="checkbox-fill-a1" className="cr"> Salvar Credenciais</label>
                                     </div>
-                                    <button className="btn">
+                                    <button className="btn" onClick={this.handleSubmit}>
                                         <i className="fa fa-sign-in text-primary f-16"/>Entrar
                                     </button>
                                 </div>
                                 <div className="input-group mb-4" style={{WebkitJustifyContent: 'space-between'}}>
                                     <FacebookLogin
                                         appId="415441372420544"
-                                        autoLoad
+                                        autoLoad={false}
                                         fields="name,email,picture"
                                         cssClass="btn shadow-2 md-6"
                                         icon={<i className="fa fa-facebook f-16" style={{color: 'white'}}/>}
@@ -101,7 +102,7 @@ class SignUp extends React.Component {
                                 {/*<p className="mb-2 text-muted">Esqueceu a senha? <NavLink to="/auth/reset-password-1">Recuperar</NavLink></p>*/}
                                 {/*<p className="mb-0 text-muted">Não tem uma conta? <NavLink to="/auth/signup">Inscrever-se</NavLink></p>*/}
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </Aux>
