@@ -28,7 +28,7 @@ class SignUp extends React.Component {
     }
 
     handleSubmit = async () => {
-        axios.defaults.baseURL = 'http://localhost:21086/'
+        axios.defaults.baseURL = 'http://peruibemelhor.nodejs7605.kinghost.net:21086/'
 
         axios.post('signin', {
             email : this.state.email,
