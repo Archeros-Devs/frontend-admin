@@ -39,7 +39,7 @@ class SignUp extends React.Component {
         .then(res => {
             if(res.data.retorno){
                 axios.defaults.headers.common = {'Authorization': `Bearer ${res.data.token}`}
-                this.props.onSingin(res.data.name)
+                this.props.onSingin(res.data.name, res.data.email, res.data.token)
                 this.props.history.push('/dashboard')
             }else{
                 console.log(res.data.msg)
@@ -115,7 +115,7 @@ class SignUp extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSingin: (nome) => dispatch({type: actionTypes.AUTH_SIGNIN, payload: {nome}}),
+        onSingin: (nome, email, token) => dispatch({type: actionTypes.AUTH_SIGNIN, payload: {nome, email, token}}),
     }
 };
 

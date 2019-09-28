@@ -5,6 +5,7 @@ import DEMO from "../../store/constant";
 import Aux from "../../hoc/_Aux";
 
 import axios from 'axios';
+import api from '../../api'
 import moment from 'moment';
 
 import avatar1 from '../../assets/images/user/avatar-1.jpg';
@@ -24,7 +25,7 @@ class SamplePage extends Component {
 
     getPastaUnauthorized = async () => {
         try {
-            const res = await axios.get(`${DEMO.SERVER_API}/pastas/homologar`)
+            const res = await api.get(`${DEMO.SERVER_API}/pastas/homologar`)
             
             if(res.data.retorno){
                 this.setState({ pasta_homologar: res.data.pastas })
@@ -33,7 +34,7 @@ class SamplePage extends Component {
                 console.log(res.data.msg)
             }
         } catch (error) {
-            
+            console.error(error)
         }
     }
 

@@ -9,7 +9,8 @@ const initialState = {
     isFullScreen: false, // static can't change
 
     user_name: '',
-    user_email: ''
+    user_email: '',
+    token: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -90,7 +91,9 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_SIGNIN:
             return {
                 ...state,
-                user_name: action.payload.nome
+                user_name: action.payload.nome,
+                user_email: action.payload.email,
+                token: action.payload.token
             }
         case actionTypes.AUTH_SIGNOUT:
             delete axios.defaults.headers.common["Authorization"];
@@ -98,7 +101,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 user_name: null,
-                user_email: null
+                user_email: null,
+                token: null
             }
         default:
             return state;

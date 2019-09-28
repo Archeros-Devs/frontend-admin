@@ -1,22 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
-import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
+
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 
 import App from './App/index';
 import * as serviceWorker from './serviceWorker';
-import reducer from './store/reducer';
 import config from './config';
 
-const store = createStore(reducer);
+import { store, persistor } from './store/storage'
 
 const app = (
     <Provider store={store}>
-        <BrowserRouter basename={config.basename}>
-            {/* basename="/datta-able" */}
-            <App />
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+            <BrowserRouter basename={config.basename}>
+                <App />
+            </BrowserRouter>
+        </PersistGate>
     </Provider>
 );
 
