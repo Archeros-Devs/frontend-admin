@@ -1,5 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import axios from 'axios'
+import * as actionTypes from "../../../store/actions";
 
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login'
@@ -37,6 +39,7 @@ class SignUp extends React.Component {
         .then(res => {
             if(res.data.retorno){
                 axios.defaults.headers.common = {'Authorization': `Bearer ${res.data.token}`}
+                this.props.onSingin(res.data.name)
                 this.props.history.push('/dashboard')
             }else{
                 console.log(res.data.msg)
@@ -110,4 +113,10 @@ class SignUp extends React.Component {
     }
 }
 
-export default SignUp;
+const mapDispatchToProps = dispatch => {
+    return {
+        onSingin: (nome) => dispatch({type: actionTypes.AUTH_SIGNIN, payload: {nome}}),
+    }
+};
+
+export default connect(null, mapDispatchToProps) (SignUp);

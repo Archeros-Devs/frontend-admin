@@ -1,11 +1,15 @@
 import * as actionTypes from './actions';
 import config from './../config';
+import axios from 'axios'
 
 const initialState = {
     isOpen: [], //for active default menu
     isTrigger: [], //for active default menu, set blank for horizontal
     ...config,
     isFullScreen: false, // static can't change
+
+    user_name: '',
+    user_email: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -83,6 +87,19 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 layout: action.layout
             };
+        case actionTypes.AUTH_SIGNIN:
+            return {
+                ...state,
+                user_name: action.payload.nome
+            }
+        case actionTypes.AUTH_SIGNOUT:
+            delete axios.defaults.headers.common["Authorization"];
+
+            return {
+                ...state,
+                user_name: null,
+                user_email: null
+            }
         default:
             return state;
     }

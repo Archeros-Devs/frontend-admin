@@ -1,3 +1,6 @@
+export const AUTH_SIGNIN = 'AUTH_SIGNIN';
+export const AUTH_SIGNOUT = 'AUTH_SIGNOUT';
+
 export const COLLAPSE_MENU = 'COLLAPSE_MENU';
 export const COLLAPSE_TOGGLE = 'COLLAPSE_TOGGLE';
 export const FULL_SCREEN = 'FULL_SCREEN';

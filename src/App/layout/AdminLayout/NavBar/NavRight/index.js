@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import {Dropdown} from 'react-bootstrap';
+import * as actionTypes from '../../../../../store/actions';
 
 import ChatList from './ChatList';
 import Aux from "../../../../../hoc/_Aux";
@@ -14,19 +16,24 @@ class NavRight extends Component {
         listOpen: false
     };
 
+    signOut = () => {
+        this.props.history.push('/dashboard')
+        this.props.onSignOut()
+    }
+
     render() {
 
         return (
             <Aux>
                 <ul className="navbar-nav ml-auto">
-                    <li>
+                    {/**<li>
                         <Dropdown alignRight={!this.props.rtlLayout}>
                             <Dropdown.Toggle variant={'link'} id="dropdown-basic">
                                 <i className="icon feather icon-bell"/>
                             </Dropdown.Toggle>
                             <Dropdown.Menu alignRight className="notification">
                                 <div className="noti-head">
-                                    <h6 className="d-inline-block m-b-0">Notifications</h6>
+                                    <h6 className="d-inline-block m-b-0">Notificações</h6>
                                     <div className="float-right">
                                         <a href={DEMO.BLANK_LINK} className="m-r-10">mark as read</a>
                                         <a href={DEMO.BLANK_LINK}>clear all</a>
@@ -75,7 +82,7 @@ class NavRight extends Component {
                                 </div>
                             </Dropdown.Menu>
                         </Dropdown>
-                    </li>
+                    </li>**/}
                     <li className={this.props.rtlLayout ? 'm-r-15' : 'm-l-15'}>
                         <a href={DEMO.BLANK_LINK} className="displayChatbox" onClick={() => {this.setState({listOpen: true});}}><i className="icon feather icon-mail"/></a>
                     </li>
@@ -87,16 +94,16 @@ class NavRight extends Component {
                             <Dropdown.Menu alignRight className="profile-notification">
                                 <div className="pro-head">
                                     <img src={Avatar1} className="img-radius" alt="User Profile"/>
-                                    <span>John Doe</span>
-                                    <a href={DEMO.BLANK_LINK} className="dud-logout" title="Logout">
+                                    <span>{this.props.user_name}</span>
+                                    <a href={DEMO.BLANK_LINK} className="dud-logout" title="Sair">
                                         <i className="feather icon-log-out"/>
                                     </a>
                                 </div>
                                 <ul className="pro-body">
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-settings"/> Settings</a></li>
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-user"/> Profile</a></li>
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-mail"/> My Messages</a></li>
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-lock"/> Lock Screen</a></li>
+                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-settings"/> Configurações</a></li>
+                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-user"/> Perfil</a></li>
+                                    {/**<li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-mail"/> My Messages</a></li>**/}
+                                    <li><a onClick={this.signOut} className="dropdown-item"><i className="feather icon-lock"/> Sair</a></li>
                                 </ul>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -108,4 +115,16 @@ class NavRight extends Component {
     }
 }
 
-export default NavRight;
+const mapStateToProps = state => {
+    return {
+        user_name: state.user_name
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSignOut: () => dispatch({type: actionTypes.AUTH_SIGNOUT}),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (NavRight);

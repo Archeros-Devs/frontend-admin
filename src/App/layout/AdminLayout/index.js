@@ -15,6 +15,9 @@ import * as actionTypes from "../../../store/actions";
 import './app.scss';
 
 class AdminLayout extends Component {
+    security = () => {
+        
+    }
 
     fullScreenExitHandler = () => {
         if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
