@@ -81,7 +81,7 @@ class SignUp extends React.Component {
                                         <i className="fa fa-sign-in text-primary f-16"/>Entrar
                                     </button>
                                 </div>
-                                <div className="input-group mb-4" style={{WebkitJustifyContent: 'space-between'}}>
+                                {/**<div className="input-group mb-4" style={{WebkitJustifyContent: 'space-between'}}>
                                     <FacebookLogin
                                         appId="415441372420544"
                                         autoLoad={false}
@@ -101,7 +101,7 @@ class SignUp extends React.Component {
                                         onSuccess={this.responseGoogle}
                                         onFailure={this.responseGoogle}
                                     />
-                                </div>
+                                </div>**/}
                                 {/*<p className="mb-2 text-muted">Esqueceu a senha? <NavLink to="/auth/reset-password-1">Recuperar</NavLink></p>*/}
                                 {/*<p className="mb-0 text-muted">Não tem uma conta? <NavLink to="/auth/signup">Inscrever-se</NavLink></p>*/}
                             </div>
