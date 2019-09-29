@@ -15,11 +15,13 @@ import logo from '../../../assets/images/logo.png';
 class SignUp extends React.Component {
     constructor(props){
         super(props)
+        this.props.onSignOut(this.state.persistEmail)
     }
 
     state = {
         email: 'archeros.devs@gmail.com',
-        senha: '123'
+        senha: '123',
+        persistEmail: false
     }
 
     responseFacebook = (response) => {
@@ -47,6 +49,11 @@ class SignUp extends React.Component {
         }).catch(err => console.log(err))
     }
 
+    handleInput = (e) => {
+        const value = e.target.checked
+        this.setState({persistEmail: value})
+    }
+
     render () {
         return(
             <Aux>
@@ -72,9 +79,9 @@ class SignUp extends React.Component {
                                     <input type="password" className="form-control" placeholder="Senha" required
                                         value={this.state.senha} onChange={(event)=>this.setState({senha: event.target.value})}/>
                                 </div>
-                                <div className="form-group text-left" style={{WebkitJustifyContent: 'space-between'}}>
+                                <div className="form-group text-center align-items-center justify-content-center">
                                     <div className="checkbox checkbox-fill d-inline">
-                                        <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" />
+                                        <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" value={this.state.persistEmail} onChange={(e) => this.handleInput(e)}/>
                                             <label htmlFor="checkbox-fill-a1" className="cr"> Salvar Credenciais</label>
                                     </div>
                                     <button className="btn" onClick={this.handleSubmit}>
@@ -113,10 +120,17 @@ class SignUp extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        onSingin: (nome, email, token) => dispatch({type: actionTypes.AUTH_SIGNIN, payload: {nome, email, token}}),
+        user_email: state.auth.user_email
     }
 };
 
-export default connect(null, mapDispatchToProps) (SignUp);
+const mapDispatchToProps = dispatch => {
+    return {
+        onSingin: (nome, email, token) => dispatch({type: actionTypes.AUTH_SIGNIN, payload: {nome, email, token}}),
+        onSignOut: (persistEmail) => dispatch({type: actionTypes.AUTH_SIGNOUT, payload: {persist: persistEmail}}),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (SignUp);

@@ -151,21 +151,21 @@ class Dashboard extends React.Component {
                     <Col md={6} xl={4}>
                         <Card>
                             <Card.Header>
-                                <Card.Title as='h5'>Rating</Card.Title>
+                                <Card.Title as='h5'>Melhor Avaliadas</Card.Title>
                             </Card.Header>
                             <Card.Body>
                                 <div className="row align-items-center justify-content-center m-b-20">
                                     <div className="col-6">
-                                        <h2 className="f-w-300 d-flex align-items-center float-left m-0">4.7 <i className="fa fa-star f-10 m-l-10 text-c-yellow"/></h2>
+                                        <h5 className="f-w-300 d-flex align-items-center float-left m-0">Pastas</h5>
                                     </div>
                                     <div className="col-6">
-                                        <h6 className="d-flex  align-items-center float-right m-0">0.4 <i className="fa fa-caret-up text-c-green f-22 m-l-10"/></h6>
+                                        <h6 className="d-flex  align-items-center float-right m-0">Votos</h6>
                                     </div>
                                 </div>
 
                                 <div className="row">
                                     <div className="col-xl-12">
-                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>5</h6>
+                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>Ruinas do Abarebebe</h6>
                                         <h6 className="align-items-center float-right">384</h6>
                                         <div className="progress m-t-30 m-b-20" style={{height: '6px'}}>
                                             <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '70%'}} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"/>
@@ -173,7 +173,7 @@ class Dashboard extends React.Component {
                                     </div>
 
                                     <div className="col-xl-12">
-                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>4</h6>
+                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>Praia Do Centro</h6>
                                         <h6 className="align-items-center float-right">145</h6>
                                         <div className="progress m-t-30  m-b-20" style={{height: '6px'}}>
                                             <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '35%'}} aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"/>
@@ -181,7 +181,7 @@ class Dashboard extends React.Component {
                                     </div>
 
                                     <div className="col-xl-12">
-                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>3</h6>
+                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>Praia Do Centro</h6>
                                         <h6 className="align-items-center float-right">24</h6>
                                         <div className="progress m-t-30  m-b-20" style={{height: '6px'}}>
                                             <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"/>
@@ -189,14 +189,14 @@ class Dashboard extends React.Component {
                                     </div>
 
                                     <div className="col-xl-12">
-                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>2</h6>
+                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>-</h6>
                                         <h6 className="align-items-center float-right">1</h6>
                                         <div className="progress m-t-30  m-b-20" style={{height: '6px'}}>
                                             <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '10%'}} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"/>
                                         </div>
                                     </div>
                                     <div className="col-xl-12">
-                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>1</h6>
+                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>-</h6>
                                         <h6 className="align-items-center float-right">0</h6>
                                         <div className="progress m-t-30  m-b-5" style={{height: '6px'}}>
                                             <div className="progress-bar" role="progressbar" style={{width: '0%'}} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"/>
@@ -208,13 +208,13 @@ class Dashboard extends React.Component {
                     </Col>
                     <Col md={6} xl={8} className='m-b-30'>
                         <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
-                            <Tab eventKey="today" title="Today">
+                            <Tab eventKey="today" title="Hoje">
                                 {tabContent}
                             </Tab>
-                            <Tab eventKey="week" title="This Week">
+                            <Tab eventKey="week" title="Este Mês">
                                 {tabContent}
                             </Tab>
-                            <Tab eventKey="all" title="All">
+                            <Tab eventKey="all" title="Todos">
                                 {tabContent}
                             </Tab>
                         </Tabs>

@@ -16,11 +16,6 @@ class NavRight extends Component {
         listOpen: false
     };
 
-    signOut = () => {
-        this.props.history.push('/dashboard')
-        this.props.onSignOut()
-    }
-
     render() {
 
         return (
@@ -103,7 +98,7 @@ class NavRight extends Component {
                                     <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-settings"/> Configurações</a></li>
                                     <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-user"/> Perfil</a></li>
                                     {/**<li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-mail"/> My Messages</a></li>**/}
-                                    <li><a onClick={this.signOut} className="dropdown-item"><i className="feather icon-lock"/> Sair</a></li>
+                                    <li><a href={'/singin'} className="dropdown-item"><i className="feather icon-lock"/> Sair</a></li>
                                 </ul>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -117,14 +112,8 @@ class NavRight extends Component {
 
 const mapStateToProps = state => {
     return {
-        user_name: state.user_name
+        user_name: state.auth.user_name
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onSignOut: () => dispatch({type: actionTypes.AUTH_SIGNOUT}),
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps) (NavRight);
+export default connect(mapStateToProps, null) (NavRight);

@@ -25,8 +25,7 @@ class SamplePage extends Component {
 
     getPastaUnauthorized = async () => {
         try {
-            const res = await api.get(`${DEMO.SERVER_API}/pastas/homologar`)
-            
+            const res = await api.get(`pastas/homologar`)
             if(res.data.retorno){
                 this.setState({ pasta_homologar: res.data.pastas })
                 console.log(res.data.pastas)
@@ -38,8 +37,27 @@ class SamplePage extends Component {
         }
     }
 
-    pressReprovar = (id) => console.log(id)
-    pressAprovar = (id) => console.log(id)
+    avaliar = async (id_pasta, avaliacao) => {
+        console.log(this.state.pasta_homologar)
+        try {
+            const res = await api.put(`/pastas/${id_pasta}/avaliar`, {
+                avaliacao
+            })
+
+            if(res.data.retorno){
+                let pastas = this.state.pasta_homologar
+                pastas = pastas.map(p => {
+                    if (p.id_pasta == id_pasta) return {...p, avaliacao} 
+                    return p
+                })
+                this.setState({pasta_homologar: pastas})
+            }else{
+                console.log(res.data.msg)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     render() {
         return (
@@ -55,22 +73,22 @@ class SamplePage extends Component {
                                     <tbody>
                                         {
                                         this.state.pasta_homologar.map(pasta => 
-                                            <tr className="unread">
+                                            <tr className="unread" key={pasta.id_pasta}>
                                                 <td><img className="rounded-circle" style={{width: '40px'}} src={avatar2} alt="activity-user"/></td>
                                                 <td>
                                                     <h6 className="mb-1"><a href={DEMO.BLANK_LINK} className="f-12">{pasta.nome}</a></h6>
-                                                    <p className="m-0">{pasta.descricao}</p>
+                                                    <p className="m-0">{pasta.discussao}</p>
                                                 </td>
                                                 <td>
                                                     <h6 className="text-muted"><i className="fa fa-circle text-c-yellow f-10 m-r-15"/>{moment(pasta.data_criacao).format('DD/MM/Y')}</h6>
-                                                    <h6 className="text-muted">{pasta.localizacao}</h6>
+                                                    
                                                 </td>
                                                 {
                                                 !pasta.avaliacao 
                                                 ?
                                                 <td>
-                                                    <button onClick={() => this.pressReprovar(pasta.id_pasta)} className="label theme-bg2 text-white f-12">Reprovar</button>
-                                                    <button onClick={() => this.pressAprovar(pasta.id_pasta)} className="label theme-bg text-white f-12">Aprovar</button>
+                                                    <button onClick={() => this.avaliar(pasta.id_pasta, +1)} className="label theme-bg text-white f-12">Aprovar</button>
+                                                    <button onClick={() => this.avaliar(pasta.id_pasta, -1)} className="label theme-bg2 text-white f-12">Reprovar</button>
                                                 </td>
                                                 :
                                                 <td>
