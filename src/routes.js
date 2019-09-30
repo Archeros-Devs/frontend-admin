@@ -29,7 +29,7 @@ const OtherSamplePage = React.lazy(() => import('./Demo/Other/SamplePage'));
 const OtherDocs = React.lazy(() => import('./Demo/Other/Docs'));
 
 const routes = [
-    { path: '/dashboard', exact: true, name: 'Default', component: DashboardDefault },
+    { path: '/dashboard', exact: true, name: 'Dashboard', component: DashboardDefault },
     { path: '/pastas', exact: true, name: 'Pasta', component: Pastas },
     
     { path: '/basic/button', exact: true, name: 'Basic Button', component: UIBasicButton },
