@@ -93,7 +93,7 @@ class Breadcrumb extends Component {
         document.title = title + '';
 
         return (
-            <Aux>
+            <Aux {...this.props}>
                 {breadcrumb}
             </Aux>
         );

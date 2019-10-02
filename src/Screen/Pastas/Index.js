@@ -47,7 +47,7 @@ class SamplePage extends Component {
             if(res.data.retorno){
                 let pastas = this.state.pasta_homologar
                 pastas = pastas.map(p => {
-                    if (p.id_pasta == id_pasta) return {...p, avaliacao} 
+                    if (p.id_pasta == id_pasta) return {...p, avaliacao}
                     return p
                 })
                 this.setState({pasta_homologar: pastas})
@@ -72,7 +72,7 @@ class SamplePage extends Component {
                                 <Table responsive hover>
                                     <tbody>
                                         {
-                                        this.state.pasta_homologar.map(pasta => 
+                                        this.state.pasta_homologar.map(pasta =>
                                             <tr className="unread" key={pasta.id_pasta}>
                                                 <td><img className="rounded-circle" style={{width: '40px'}} src={avatar2} alt="activity-user"/></td>
                                                 <td>
@@ -84,7 +84,7 @@ class SamplePage extends Component {
                                                     
                                                 </td>
                                                 {
-                                                !pasta.avaliacao 
+                                                !pasta.avaliacao
                                                 ?
                                                 <td>
                                                     <button onClick={() => this.avaliar(pasta.id_pasta, +1)} className="label theme-bg text-white f-12">Aprovar</button>

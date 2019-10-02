@@ -18,7 +18,6 @@ export default function auth(state = initialState, action) {
       }
     case actionTypes.AUTH_SIGNOUT:
       const persistEmail = action.payload.persist
-      console.log(persistEmail)
       delete axios.defaults.headers.common["Authorization"];
 
       return {

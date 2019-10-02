@@ -13,7 +13,7 @@ const navLogo = (props) => {
             <div className="navbar-brand header-logo">
                  <a href={'/admin/dashboard'} className="b-brand">
                     <div className="b-bg">
-                        <i className="feather icon-trending-up" />
+                        <i className="feather icon-globe" />
                     </div>
                     <span className="b-title">Peruíbe Melhor</span>
                  </a>
