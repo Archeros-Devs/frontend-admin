@@ -71,10 +71,10 @@ class TableHomologation extends Component {
                                 <Card.Title as='h5'>Pastas para Homologação</Card.Title>
                             </Card.Header>
                             <Card.Body className='px-0 py-2'>
-                                <div>
-                                    {this.state.loading !== true &&
+                                <div className='content-center'>
+                                    {this.state.loading === true &&
                                         <Loader
-                                            type="Puff"
+                                            type="MutatingDots"
                                             color="#00BFFF"
                                             height={100}
                                             width={100}
