@@ -1,5 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import axios from 'axios'
+import * as actionTypes from "../../../store/actions";
 
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login'
@@ -13,11 +15,13 @@ import logo from '../../../assets/images/logo.png';
 class SignUp extends React.Component {
     constructor(props){
         super(props)
+        this.props.onSignOut(this.state.persistEmail)
     }
 
     state = {
         email: 'archeros.devs@gmail.com',
-        senha: '123'
+        senha: '123',
+        persistEmail: false
     }
 
     responseFacebook = (response) => {
@@ -37,11 +41,17 @@ class SignUp extends React.Component {
         .then(res => {
             if(res.data.retorno){
                 axios.defaults.headers.common = {'Authorization': `Bearer ${res.data.token}`}
+                this.props.onSingin(res.data.name, res.data.email, res.data.token)
                 this.props.history.push('/dashboard')
             }else{
                 console.log(res.data.msg)
             }
         }).catch(err => console.log(err))
+    }
+
+    handleInput = (e) => {
+        const value = e.target.checked
+        this.setState({persistEmail: value})
     }
 
     render () {
@@ -69,16 +79,16 @@ class SignUp extends React.Component {
                                     <input type="password" className="form-control" placeholder="Senha" required
                                         value={this.state.senha} onChange={(event)=>this.setState({senha: event.target.value})}/>
                                 </div>
-                                <div className="form-group text-left" style={{WebkitJustifyContent: 'space-between'}}>
+                                <div className="form-group text-center align-items-center justify-content-center">
                                     <div className="checkbox checkbox-fill d-inline">
-                                        <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" />
+                                        <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" value={this.state.persistEmail} onChange={(e) => this.handleInput(e)}/>
                                             <label htmlFor="checkbox-fill-a1" className="cr"> Salvar Credenciais</label>
                                     </div>
                                     <button className="btn" onClick={this.handleSubmit}>
                                         <i className="fa fa-sign-in text-primary f-16"/>Entrar
                                     </button>
                                 </div>
-                                <div className="input-group mb-4" style={{WebkitJustifyContent: 'space-between'}}>
+                                {/**<div className="input-group mb-4" style={{WebkitJustifyContent: 'space-between'}}>
                                     <FacebookLogin
                                         appId="415441372420544"
                                         autoLoad={false}
@@ -98,7 +108,7 @@ class SignUp extends React.Component {
                                         onSuccess={this.responseGoogle}
                                         onFailure={this.responseGoogle}
                                     />
-                                </div>
+                                </div>**/}
                                 {/*<p className="mb-2 text-muted">Esqueceu a senha? <NavLink to="/auth/reset-password-1">Recuperar</NavLink></p>*/}
                                 {/*<p className="mb-0 text-muted">Não tem uma conta? <NavLink to="/auth/signup">Inscrever-se</NavLink></p>*/}
                             </div>
@@ -110,4 +120,17 @@ class SignUp extends React.Component {
     }
 }
 
-export default SignUp;
+const mapStateToProps = state => {
+    return {
+        user_email: state.auth.user_email
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSingin: (nome, email, token) => dispatch({type: actionTypes.AUTH_SIGNIN, payload: {nome, email, token}}),
+        onSignOut: (persistEmail) => dispatch({type: actionTypes.AUTH_SIGNOUT, payload: {persist: persistEmail}}),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (SignUp);

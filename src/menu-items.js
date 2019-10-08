@@ -10,8 +10,30 @@ export default {
                     id: 'dashboard',
                     title: 'Dashboard',
                     type: 'item',
-                    url: '/dashboard/default',
+                    url: '/dashboard',
                     icon: 'feather icon-home',
+                }
+            ]
+        },
+        {
+            id: 'Actions',
+            title: 'Ações',
+            type: 'group',
+            icon: 'icon-navigation',
+            children: [
+                {
+                    id: 'folders',
+                    title: 'Pastas',
+                    type: 'item',
+                    url: '/pastas',
+                    icon: 'feather icon-folder',
+                },
+                {
+                    id: 'admins',
+                    title: 'Administradores',
+                    type: 'item',
+                    url: '/admins',
+                    icon: 'feather icon-user',
                 }
             ]
         },
