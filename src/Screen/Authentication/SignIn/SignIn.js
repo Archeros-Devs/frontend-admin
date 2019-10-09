@@ -96,7 +96,7 @@ class SignUp extends React.Component {
                                             <label htmlFor="checkbox-fill-a1" className="cr"> Salvar Credenciais</label>
                                     </div>
                                 
-                                    <Button 
+                                    <Button variant= "black"
                                         onClick={()=> this.handleSubmit()}
                                     >
                                         {this.state.loading === true ? "": "Entrar"}

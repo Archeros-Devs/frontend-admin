@@ -40,7 +40,7 @@ export default {
                     id: 'admins',
                     title: 'Administradores',
                     type: 'item',
-                    url: '/admins',
+                    url: '/admin',
                     icon: 'feather icon-user',
                 }
             ]

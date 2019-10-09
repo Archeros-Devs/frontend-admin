@@ -88,15 +88,15 @@ class NavRight extends Component {
                             </Dropdown.Toggle>
                             <Dropdown.Menu alignRight className="profile-notification">
                                 <div className="pro-head">
-                                    <img src={Avatar1} className="img-radius" alt="User Profile"/>
+                                    <img src={Avatar2} className="img-radius" alt="User Profile"/>
                                     <span>{this.props.user_name}</span>
                                     <a href={DEMO.BLANK_LINK} className="dud-logout" title="Sair">
                                         <i className="feather icon-log-out"/>
                                     </a>
                                 </div>
                                 <ul className="pro-body">
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-settings"/> Configurações</a></li>
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-user"/> Perfil</a></li>
+                                    {/**<li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-settings"/> Configurações</a></li>**/}
+                                    <li><a href={'/perfil'} className="dropdown-item"><i className="feather icon-user"/> Perfil</a></li>
                                     {/**<li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-mail"/> My Messages</a></li>**/}
                                     <li><a href={'/admin/singin'} className="dropdown-item"><i className="feather icon-lock"/> Sair</a></li>
                                 </ul>
