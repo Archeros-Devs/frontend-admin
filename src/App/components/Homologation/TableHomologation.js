@@ -2,17 +2,17 @@ import React, {Component} from 'react';
 import {Row, Col, Table, Card, Tabs, Tab} from 'react-bootstrap';
 import Loader from 'react-loader-spinner'
 
-import DEMO from "../../store/constant";
-import Aux from "../../hoc/_Aux";
+import DEMO from "../../../store/constant";
+import Aux from "../../../hoc/_Aux";
 
 import axios from 'axios';
-import api from '../../api'
+import api from '../../../api'
 import moment from 'moment';
 
-import avatar1 from '../../assets/images/user/avatar-1.jpg';
-import avatar2 from '../../assets/images/user/avatar-2.jpg';
-import avatar3 from '../../assets/images/user/avatar-3.jpg';
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import avatar1 from '../../../assets/images/user/avatar-1.jpg';
+import avatar2 from '../../../assets/images/user/avatar-2.jpg';
+import avatar3 from '../../../assets/images/user/avatar-3.jpg';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 class TableHomologation extends Component {
     state = {

@@ -12,6 +12,10 @@ import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
 
 import logo from '../../../assets/images/logo.png';
 
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
+
+
 class SignUp extends React.Component {
     constructor(props){
         super(props)
@@ -21,7 +25,8 @@ class SignUp extends React.Component {
     state = {
         email: 'archeros.devs@gmail.com',
         senha: '123',
-        persistEmail: false
+        persistEmail: false,
+        loading: false 
     }
 
     responseFacebook = (response) => {
@@ -32,6 +37,9 @@ class SignUp extends React.Component {
     }
 
     handleSubmit = async () => {
+        
+        this.setState({loading: true})
+        
         axios.defaults.baseURL = 'http://peruibemelhor.nodejs7605.kinghost.net:21086/'
 
         axios.post('signin', {
@@ -47,6 +55,9 @@ class SignUp extends React.Component {
                 console.log(res.data.msg)
             }
         }).catch(err => console.log(err))
+
+        this.setState({loading: false})
+
     }
 
     handleInput = (e) => {
@@ -84,9 +95,24 @@ class SignUp extends React.Component {
                                         <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" value={this.state.persistEmail} onChange={(e) => this.handleInput(e)}/>
                                             <label htmlFor="checkbox-fill-a1" className="cr"> Salvar Credenciais</label>
                                     </div>
-                                    <button className="btn" onClick={this.handleSubmit}>
-                                        <i className="fa fa-sign-in text-primary f-16"/>Entrar
-                                    </button>
+                                
+                                    <Button 
+                                        onClick={()=> this.handleSubmit()}
+                                    >
+                                        {this.state.loading === true ? "": "Entrar"}
+                                        {this.state.loading === true 
+                                        ?
+                                            <Spinner
+                                            as="span"
+                                            animation="grow"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                        />
+                                        : ""
+                                        }
+                                    </Button>
+
                                 </div>
                                 {/**<div className="input-group mb-4" style={{WebkitJustifyContent: 'space-between'}}>
                                     <FacebookLogin
