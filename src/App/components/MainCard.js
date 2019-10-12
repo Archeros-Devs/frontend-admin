@@ -5,15 +5,14 @@ import windowSize from 'react-window-size';
 import Aux from "../../hoc/_Aux";
 import DEMO from "../../store/constant";
 
-import Pagination from './Pagination/Pagination'
-
 class MainCard extends Component {
     state = {
         isOption: this.props.isOption,
         fullCard: false,
         collapseCard: false,
         loadCard: false,
-        cardRemove: false
+        cardRemove: false,
+        activePage: 1
     };
 
     cardReloadHandler = () => {
@@ -26,6 +25,11 @@ class MainCard extends Component {
     cardRemoveHandler = () => {
         this.setState({cardRemove: true});
     };
+
+    handlePageChange(pageNumber) {
+        console.log(`active page is ${pageNumber}`);
+        this.setState({activePage: pageNumber});
+    }
 
     render() {
         let fullScreenStyle, loader, cardHeaderRight, cardHeader;
@@ -66,7 +70,6 @@ class MainCard extends Component {
             <Card.Header>
                 <Card.Title as='h5'>{this.props.title}</Card.Title>
                 {cardHeaderRight}
-                <Pagination pages={50} currentPage={5}/>
             </Card.Header>
         );
 
@@ -100,6 +103,15 @@ class MainCard extends Component {
                         <Card.Body>
                             {this.props.children}
                         </Card.Body>
+                        <Card.Footer style={{padding: 0, paddingLeft: '1em', paddingRight: '1em', paddingTop: '1em', display: 'flex', justifyContent: 'flex-end'}}>
+                        {/*<Pagination
+                            activePage={this.state.activePage}
+                            itemsCountPerPage={10}
+                            totalItemsCount={450}
+                            pageRangeDisplayed={5}
+                            onChange={this.handlePageChange}
+                        />*/}
+                        </Card.Footer>
                     </div>
                 </Collapse>
                 {loader}
