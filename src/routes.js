@@ -7,6 +7,19 @@ global.jQuery = $;
 
 const DashboardDefault = React.lazy(() => import('./Screen/Dashboard/Default'));
 
+const Pastas = React.lazy(() => import('./Screen/Pastas/Index'));
+
+const Admin = React.lazy(() => import('./Screen/Administradores/Index' ));
+
+const Perfil = React.lazy(() => import('./Screen/Perfil/Index'));
+
+
+
+
+
+
+
+
 const UIBasicButton = React.lazy(() => import('./Demo/UIElements/Basic/Button'));
 const UIBasicBadges = React.lazy(() => import('./Demo/UIElements/Basic/Badges'));
 const UIBasicBreadcrumbPagination = React.lazy(() => import('./Demo/UIElements/Basic/BreadcrumbPagination'));
@@ -27,7 +40,11 @@ const OtherSamplePage = React.lazy(() => import('./Demo/Other/SamplePage'));
 const OtherDocs = React.lazy(() => import('./Demo/Other/Docs'));
 
 const routes = [
-    { path: '/dashboard', exact: true, name: 'Default', component: DashboardDefault },
+    { path: '/dashboard', exact: true, name: 'Dashboard', component: DashboardDefault },
+    { path: '/pastas', exact: true, name: 'Pasta', component: Pastas },
+    { path: '/admin' , exact: true, name: 'Admin', component: Admin },
+    { path: '/perfil' , exact: true, name: 'Perfil', component: Perfil },
+    
     { path: '/basic/button', exact: true, name: 'Basic Button', component: UIBasicButton },
     { path: '/basic/badges', exact: true, name: 'Basic Badges', component: UIBasicBadges },
     { path: '/basic/breadcrumb-paging', exact: true, name: 'Basic Breadcrumb Pagination', component: UIBasicBreadcrumbPagination },

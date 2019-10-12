@@ -33,12 +33,12 @@ $Menu-collapsed-width: 80px;
 
 // color list for build layouts
 // temp variables
-$theme-color: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
-$theme-color2: linear-gradient(-135deg, #899FD4 0%, #A389D4 100%);
-$primary-color: #04a9f5;
-$warning-color: #f4c22b;
+$theme-color: linear-gradient(-135deg, #ffde31 0%, #fc4700 100%);
+$theme-color2: linear-gradient(-135deg, #8dc5eb 0%, #034191 100%);
+$primary-color: #fbff00;
+$warning-color: #fbff00;
 $danger-color: #f44236;
-$success-color: #1de9b6;
+$success-color: #5fb2e9;
 $purple-color: #a389d4;
 $info-color: #3ebfea;
 $secondary-color: #748892;
@@ -61,7 +61,7 @@ $menu-dark-background: #3f4d67;
 $menu-dark-text-color: #a9b7d0;
 $menu-light-background: #fff;
 $menu-light-text-color: #3f4d67;
-$menu-active-color: #04a9f5;
+$menu-active-color: #45a5d1;
 
 // dark layout colors
 $dark-layout: #212224;
@@ -110,3 +110,8 @@ $theme-color-interval: 8% !default;
 $alert-bg-level: -10 !default;
 $alert-border-level: -9 !default;
 $alert-color-level: 6 !default;
+
+// Peruibe Colors 
+$button-colors: #ff0000;
+
+

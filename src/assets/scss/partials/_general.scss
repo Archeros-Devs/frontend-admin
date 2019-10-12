@@ -881,3 +881,8 @@ p.text-muted {
     -webkit-font-smoothing: antialiased;
 }
 /* material icon for material datetime picker */
+
+.content-center {
+    display: flex;
+    justify-content: center;
+}
