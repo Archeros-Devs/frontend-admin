@@ -127,15 +127,15 @@ class MainCard extends Component {
                 {cardHeader}
                 <Collapse in={!this.state.collapseCard}>
                     <div>
-                        <Card.Body>
+                        <Card.Body className={this.props.bodyClass}>
                             {this.props.children}
                         </Card.Body>
                         {this.props.pagination &&
                         <Card.Footer style={{padding: 0, paddingLeft: '1em', paddingRight: '1em', paddingTop: '1em', display: 'flex', justifyContent: 'flex-end'}}>
                         <Pagination
                             activePage={this.state.activePage}
-                            itemsCountPerPage={10}
-                            totalItemsCount={450}
+                            itemsCountPerPage={this.props.pagination.itemsCountPerPage}
+                            totalItemsCount={this.props.pagination.totalItemsCount}
                             pageRangeDisplayed={5}
                             onChange={(pageNumber) => this.handlePageChange(pageNumber)}
                         />

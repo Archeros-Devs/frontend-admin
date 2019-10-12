@@ -23,10 +23,17 @@ export default {
             children: [
                 {
                     id: 'folders',
-                    title: 'Homologação',
+                    title: 'Pastas',
                     type: 'item',
                     url: '/pastas',
                     icon: 'feather icon-folder',
+                },
+                {
+                    id: 'folders_homogation',
+                    title: 'Homologação',
+                    type: 'item',
+                    url: '/pastas/homologar',
+                    icon: 'feather icon-filter',
                 },
             ]
         },
