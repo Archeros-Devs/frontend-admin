@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
-import {Row, Col, Table, Card, Tabs, Tab} from 'react-bootstrap';
+import {Row, Col, Table} from 'react-bootstrap';
 import Loader from 'react-loader-spinner'
+import Card from "../Card/Index";
 
 import DEMO from "../../../store/constant";
 import Aux from "../../../hoc/_Aux";
 
-import axios from 'axios';
 import api from '../../../api'
 import moment from 'moment';
 
-import avatar1 from '../../../assets/images/user/avatar-1.jpg';
 import avatar2 from '../../../assets/images/user/avatar-2.jpg';
-import avatar3 from '../../../assets/images/user/avatar-3.jpg';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import "./style.scss"
 
 class TableHomologation extends Component {
     state = {
@@ -66,21 +65,16 @@ class TableHomologation extends Component {
             <Aux>
                 <Row>
                     <Col>
-                    <Card className='Recent-Users'>
-                            <Card.Header>
-                                <Card.Title as='h5'>Pastas para Homologação</Card.Title>
-                            </Card.Header>
-                            <Card.Body className='px-0 py-2'>
-                                <div className='content-center'>
-                                    {this.state.loading === true &&
-                                        <Loader
-                                            type="MutatingDots"
-                                            color="#00BFFF"
-                                            height={100}
-                                            width={100}
-                                        />
-                                    }
-                                </div>
+                    <Card
+                        className='card'
+                        title='Pastas para Homologação'
+                        isOption
+                        fullscreen
+                        reload
+                        pagination={{itemsCountPerPage: 5, totalItemsCount: 50}}
+                        loading={this.state.loading}
+                        onCardReload={this.getPastaUnauthorized}>
+                            <div className='px-0 py-2'>
                                 <Table responsive hover>
                                     <tbody>
                                         {
@@ -94,24 +88,16 @@ class TableHomologation extends Component {
                                                 <td>
                                                     <h6 className="text-muted"><i className="fa fa-circle text-c-yellow f-10 m-r-15"/>{moment(pasta.data_criacao).format('DD/MM/Y')}</h6>
                                                 </td>
-                                                {
-                                                !pasta.avaliacao
-                                                ?
-                                                <td>
-                                                    <button onClick={() => this.avaliar(pasta.id_pasta, +1)} className="label theme-bg text-white f-12">Aprovar</button>
-                                                    <button onClick={() => this.avaliar(pasta.id_pasta, -1)} className="label theme-bg2 text-white f-12">Reprovar</button>
+                                                <td>{console.log(pasta.avaliacao)}
+                                                    <button onClick={() => this.avaliar(pasta.id_pasta, +1)} style={{...pasta.avaliacao === -1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-success text-white`}>Aprovar</button>
+                                                    <button onClick={() => this.avaliar(pasta.id_pasta, -1)} style={{...pasta.avaliacao === 1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-danger text-white`}>Reprovar</button>
                                                 </td>
-                                                :
-                                                <td>
-                                                    <div className="progress-bar progress-c-theme2" role="progressbar" style={{width: '45%', height: '6px'}} aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"/>
-                                                </td>
-                                                }
                                             </tr>
                                         )
                                         }
                                     </tbody>
                                 </Table>
-                            </Card.Body>
+                            </div>
                         </Card>
                     </Col>
                 </Row>

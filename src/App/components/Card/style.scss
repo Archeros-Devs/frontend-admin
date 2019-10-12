@@ -1,0 +1,22 @@
+.pagination{
+    .active a{
+        background-color: #fbff00;
+        color: white;
+
+    }
+
+    .disabled a{
+        color: rgb(206, 206, 206);
+        cursor: not-allowed;
+    }
+
+    li {
+
+    }
+
+    a{
+        padding:7px 12px;
+        border: 1px solid rgb(228, 228, 228)!important;
+        border-radius: 5px
+    }
+}

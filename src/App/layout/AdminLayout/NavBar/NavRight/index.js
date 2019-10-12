@@ -89,8 +89,8 @@ class NavRight extends Component {
                             <Dropdown.Menu alignRight className="profile-notification">
                                 <div className="pro-head">
                                     <img src={Avatar2} className="img-radius" alt="User Profile"/>
-                                    <span>{this.props.user_name}</span>
-                                    <a href={DEMO.BLANK_LINK} className="dud-logout" title="Sair">
+                                    <span style={{color: '#000'}}>{this.props.user_name}</span>
+                                    <a href={DEMO.BLANK_LINK} className="dud-logout" style={{color: '#000'}} title="Sair">
                                         <i className="feather icon-log-out"/>
                                     </a>
                                 </div>

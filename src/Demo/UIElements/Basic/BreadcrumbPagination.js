@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 
 import Aux from "../../../hoc/_Aux";
-import Card from "../../../App/components/MainCard";
+import Card from "../../../App/components/Card/Index.js";
 import DEMO from "../../../store/constant";
 
 class BreadcrumbPagination extends Component {

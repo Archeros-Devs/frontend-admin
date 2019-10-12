@@ -3,7 +3,7 @@ import {Row, Col} from 'react-bootstrap';
 
 import Aux from "../../hoc/_Aux";
 
-import TableHomologation from '../../App/components/Homologation/TableHomologation';
+import TableHomologation from '../../App/components/Homologation/Index';
 
 class SamplePage extends Component {
     render() {
