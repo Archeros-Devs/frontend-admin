@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Row, Col, Card, Badge, Spinner} from 'react-bootstrap';
+import {Row, Col, Badge, Spinner} from 'react-bootstrap';
+import Card from '../../App/components/Card/Index'
 
 import api from '../../api'
 import Aux from "../../hoc/_Aux";
@@ -60,51 +61,53 @@ class SamplePage extends Component {
         const { pasta, loading } = this.state;
         return (
             <Aux>
-                <div className='my-container'>
-                    <div className='header'>
-                        <span className='title my-card'>{
-                            pasta.nome
-                                ? pasta.nome
-                                : loading
-                                    ? <Spinner animation="border" role="status" size="sm"/>
-                                    : 'Pasta não encontrada'
-                        }</span>
-                    </div>
-                    {!!pasta.nome &&
-                    <div className='body'>
-                        <div className='my-card col-left'>
-                            <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                <h4>{pasta.nome} <Badge variant="secondary">{pasta.categoria}</Badge></h4>
+                <Card
+                    className=''
+                    title={<h4>{pasta.nome} <Badge variant="secondary">{pasta.categoria}</Badge></h4>}
+                    bodyClass={'px-0 py-0'}
+                    isOption
+                    fullscreen
+                    reload
+                    pagination={{itemsCountPerPage: 5, totalItemsCount: 2}}
+                    loading={this.state.loading}
+                    onCardReload={() => {}}>
+                    <div className='my-container'>
+                        {!!pasta.nome &&
+                        <div className='body'>
+                            <div className='my-card col-left'>
+                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                <h5>Descrição</h5>
                                 <label>{moment(pasta.data_criacao).format('DD/MM/YYYY')}</label>
-                            </div>
-                            <label className="text-muted mb-4">{pasta.descricao}</label>
-                            <h5>Discussão</h5>
-                            <label className="text-muted mb-4">{pasta.discussao}</label>
-                        </div>
-                        <div className='col-right'>
-                            <div className='my-card card-user'>
-                                <ModalImage
-                                    images={[pasta.user_img || profile_image]}
-                                    displayIndex={0}
-                                    alt='Imagem do Usuário'
-                                />
-                                <div className='info'>
-                                    <label>{pasta.user_nome}</label>
-                                    <label>{pasta.email}</label>
-                                    <label>{pasta.escolaridade}</label>
                                 </div>
+                                <label className="text-muted mb-4">{pasta.descricao}</label>
+                                <h5>Discussão</h5>
+                                <label className="text-muted mb-4">{pasta.discussao}</label>
                             </div>
+                            <div className='col-right'>
+                                <div className='my-card card-user'>
+                                    <ModalImage
+                                        images={[pasta.user_img || profile_image]}
+                                        displayIndex={0}
+                                        alt='Imagem do Usuário'
+                                    />
+                                    <div className='info'>
+                                        <label>{pasta.user_nome}</label>
+                                        <label>{pasta.email}</label>
+                                        <label>{pasta.escolaridade}</label>
+                                    </div>
+                                </div>
 
-                            {!!this.state.imgs.length &&
-                            <div className='my-card card-imgs' style={{marginTop: '1em'}}>
-                                <ModalImage
-                                    images={this.state.imgs}
-                                    displayIndex={0}
-                                />
-                            </div>}
-                        </div>
-                    </div>}
-                </div>
+                                {!!this.state.imgs.length &&
+                                <div className='my-card card-imgs' style={{marginTop: '1em'}}>
+                                    <ModalImage
+                                        images={this.state.imgs}
+                                        displayIndex={0}
+                                    />
+                                </div>}
+                            </div>
+                        </div>}
+                    </div>
+                </Card>
             </Aux>
         );
     }

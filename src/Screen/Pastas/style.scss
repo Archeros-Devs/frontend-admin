@@ -1,7 +1,7 @@
 .my-container {
     border-radius: 1em;
     background-color: #fff;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    //box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 }
 
 .header { //../../assets/images/bg-images/bg4.jpg
@@ -24,7 +24,6 @@
     display: flex;
     padding: 2em;
     padding-top: 0;
-    top: -3em;
 
     @media (max-width: 768px){
         flex-direction: column !important;
@@ -58,7 +57,7 @@
 .my-card {
     border-radius: 1em;
     background-color: #fff;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    //box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     padding: 1em;
     display: flex;
 }
