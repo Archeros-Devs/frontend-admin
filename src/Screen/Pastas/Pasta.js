@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Card, Image} from 'react-bootstrap';
+import {Row, Col, Card, Badge, Spinner} from 'react-bootstrap';
 
 import api from '../../api'
 import Aux from "../../hoc/_Aux";
@@ -9,6 +9,7 @@ import ModalImage from "../../App/components/ModalImage/Index";
 import profile_image from '../../assets/images/user/avatar-2.jpg'
 
 import './style.scss'
+import moment from 'moment';
 
 class SamplePage extends Component {
     state = {
@@ -36,6 +37,7 @@ class SamplePage extends Component {
             id_usuario: 2
             localizacao: "Estância Balneária Convento Velho, Peruíbe - SP, 11750-000"
             nome: "Ruinas do Abarebebe"
+            user_img: "https://foxhugh.files.wordpress.com/2012/06/6-jeremy-renner-as-clint-barton-hawkeye.png"
             user_nome: "Archeros Devs"
         **/
         let id_pasta = this.state.id_pasta
@@ -55,16 +57,29 @@ class SamplePage extends Component {
     }
 
     render() {
-        const { pasta } = this.state;
+        const { pasta, loading } = this.state;
         return (
             <Aux>
                 <div className='my-container'>
                     <div className='header'>
-                    <span className='title my-card'>{pasta.nome}</span>
+                        <span className='title my-card'>{
+                            pasta.nome
+                                ? pasta.nome
+                                : loading
+                                    ? <Spinner animation="border" role="status" size="sm"/>
+                                    : 'Pasta não encontrada'
+                        }</span>
                     </div>
+                    {!!pasta.nome &&
                     <div className='body'>
                         <div className='my-card col-left'>
-                             <label>{pasta.nome}</label>
+                            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                <h4>{pasta.nome} <Badge variant="secondary">{pasta.categoria}</Badge></h4>
+                                <label>{moment(pasta.data_criacao).format('DD/MM/YYYY')}</label>
+                            </div>
+                            <label className="text-muted mb-4">{pasta.descricao}</label>
+                            <h5>Discussão</h5>
+                            <label className="text-muted mb-4">{pasta.discussao}</label>
                         </div>
                         <div className='col-right'>
                             <div className='my-card card-user'>
@@ -88,7 +103,7 @@ class SamplePage extends Component {
                                 />
                             </div>}
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </Aux>
         );

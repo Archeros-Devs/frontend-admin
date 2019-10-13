@@ -8,7 +8,9 @@ class NavSearch extends Component {
     state = {
         searchWidth: (this.props.windowWidth < 992) ? 90 : 0,
         searchString: (this.props.windowWidth < 992) ? '90px' : '',
-        isOpen: (this.props.windowWidth < 992)
+        isOpen: (this.props.windowWidth < 992),
+
+        value: ''
     };
 
     searchOnHandler = () => {
@@ -43,6 +45,10 @@ class NavSearch extends Component {
         }, 35);
     };
 
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
     render() {
         let searchClass = ['main-search'];
         if (this.state.isOpen) {
@@ -53,7 +59,7 @@ class NavSearch extends Component {
             <Aux>
                 <div id="main-search" className={searchClass.join(' ')}>
                     <div className="input-group">
-                        <input type="text" id="m-search" className="form-control" placeholder="Search . . ." style={{width: this.state.searchString}}/>
+                        <input type="text" id="m-search" className="form-control" placeholder="Buscar . . ." style={{width: this.state.searchString}} value={this.state.value} onChange={(e) => this.handleChange(e)}/>
                         <a href={DEMO.BLANK_LINK} className="input-group-append search-close" onClick={this.searchOffHandler}>
                             <i className="feather icon-x input-group-text"/>
                         </a>

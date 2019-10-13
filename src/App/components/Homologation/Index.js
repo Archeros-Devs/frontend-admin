@@ -65,7 +65,7 @@ class TableHomologation extends Component {
             <Aux>
                 <Row>
                     <Col>
-                    <Card
+                        <Card
                         className='card'
                         title='Pastas para Homologação'
                         bodyClass={'px-0 py-0'}
@@ -88,9 +88,7 @@ class TableHomologation extends Component {
                                                 </td>
                                                 <td>
                                                     <h6 className="text-muted">
-                                                        <OverlayTrigger key={id} overlay={<Tooltip>{'asdasd'}</Tooltip>}>
                                                         <i className="fa fa-circle text-c-yellow f-10 m-r-15"/>
-                                                        </OverlayTrigger>
                                                         {moment(pasta.data_criacao).format('DD/MM/Y')}
                                                     </h6>
                                                 </td>
@@ -100,6 +98,13 @@ class TableHomologation extends Component {
                                                 </td>
                                             </tr>
                                         )
+                                        }
+                                        {!this.state.pasta_homologar.length &&
+                                            <tr className="unread">
+                                                <td colspan="4">
+                                                    <span>Tente novamente mais tarde ou tente recarregar a página</span>
+                                                </td>
+                                            </tr>
                                         }
                                     </tbody>
                                 </Table>

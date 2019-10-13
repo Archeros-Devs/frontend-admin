@@ -19,7 +19,7 @@ export default class LightboxExample extends Component {
         <div className='img-container'>
         {images &&
             images.map((image, id) => {
-                return  <img className='img' src={image} alt={`${alt}#${id}`} onClick={() => this.setState({ isOpen: true, photoIndex: id })}/>
+                return  <img className='img' src={image} alt={`${alt}#${id}`} key={id} onClick={() => this.setState({ isOpen: true, photoIndex: id })}/>
             })
         }
         </div>
