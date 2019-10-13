@@ -68,7 +68,6 @@ class SamplePage extends Component {
                     isOption
                     fullscreen
                     reload
-                    pagination={{itemsCountPerPage: 5, totalItemsCount: 2}}
                     loading={this.state.loading}
                     onCardReload={() => {}}>
                     <div className='my-container'>
