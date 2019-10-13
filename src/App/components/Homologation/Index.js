@@ -75,14 +75,14 @@ class TableHomologation extends Component {
                         pagination={{itemsCountPerPage: 5, totalItemsCount: 2}}
                         loading={this.state.loading}
                         onCardReload={this.getPastaUnauthorized}>
-                            <div className=''>
-                                <Table responsive hover>
+                            <div>
+                                <Table responsive hover style={{marginBottom: 0}}>
                                     <tbody>
                                         {
                                         this.state.pasta_homologar.map((pasta, id) =>
                                             <tr className="unread" key={pasta.id_pasta}>
                                                 <td><img className="rounded-circle" style={{width: '40px'}} src={avatar2} alt="activity-user"/></td>
-                                                <td>
+                                                <td style={{textAlign: 'left'}}>
                                                     <h6 className="mb-1"><a href={`/admin/pastas/${pasta.id_pasta}`} className="f-12">{pasta.nome}</a></h6>
                                                     <p className="m-0">{pasta.discussao}</p>
                                                 </td>

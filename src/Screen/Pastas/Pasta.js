@@ -4,6 +4,8 @@ import {Row, Col, Card, Image} from 'react-bootstrap';
 import api from '../../api'
 import Aux from "../../hoc/_Aux";
 
+import ModalImage from "../../App/components/ModalImage/Index";
+
 import profile_image from '../../assets/images/user/avatar-2.jpg'
 
 import './style.scss'
@@ -12,7 +14,7 @@ class SamplePage extends Component {
     state = {
         id_pasta: this.props.match.params.id_pasta,
         pasta: {},
-
+        imgs: [],
         loading: true
     }
 
@@ -40,8 +42,8 @@ class SamplePage extends Component {
         api.get(`/pastas/${id_pasta}`)
         .then(res => {
             if(res.data.retorno){
-                console.info(res.data.pasta)
-                this.setState({pasta: res.data.pasta})
+                console.info(res.data)
+                this.setState({pasta: res.data.pasta, imgs: res.data.imgs})
             }else{
                 console.info(res.data.msg)
             }
@@ -61,16 +63,30 @@ class SamplePage extends Component {
                     <span className='title my-card'>{pasta.nome}</span>
                     </div>
                     <div className='body'>
-                        <div className='my-card card-pasta'>
+                        <div className='my-card col-left'>
                              <label>{pasta.nome}</label>
                         </div>
-                        <div className='my-card card-user'>
-                            <Image src={profile_image} roundedCircle />
-                            <div className='info'>
-                                <label>{pasta.user_nome}</label>
-                                <label>{pasta.email}</label>
-                                <label>{pasta.escolaridade}</label>
+                        <div className='col-right'>
+                            <div className='my-card card-user'>
+                                <ModalImage
+                                    images={[pasta.user_img || profile_image]}
+                                    displayIndex={0}
+                                    alt='Imagem do Usuário'
+                                />
+                                <div className='info'>
+                                    <label>{pasta.user_nome}</label>
+                                    <label>{pasta.email}</label>
+                                    <label>{pasta.escolaridade}</label>
+                                </div>
                             </div>
+
+                            {!!this.state.imgs.length &&
+                            <div className='my-card card-imgs' style={{marginTop: '1em'}}>
+                                <ModalImage
+                                    images={this.state.imgs}
+                                    displayIndex={0}
+                                />
+                            </div>}
                         </div>
                     </div>
                 </div>
