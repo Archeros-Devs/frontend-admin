@@ -57,6 +57,23 @@ class SamplePage extends Component {
         })
     }
 
+    avaliar = (id_pasta, avaliacao) => {
+        try {
+            api.put(`/pastas/${id_pasta}/avaliar`, {
+                avaliacao
+            })
+            .then(res => {
+                console.info(res)
+                this.setState({pasta: {...this.state.pasta, avaliacao: avaliacao}})
+            })
+            .catch(error => {
+                console.error(error)
+            })
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     render() {
         const { pasta, loading } = this.state;
         return (
@@ -68,15 +85,21 @@ class SamplePage extends Component {
                     isOption
                     fullscreen
                     reload
-                    loading={this.state.loading}
-                    onCardReload={() => {}}>
+                    loading={loading}
+                    onCardReload={() => {}}
+                    cardHeaderRight={
+                        <div>
+                            <button onClick={() => this.avaliar(pasta.id_pasta, +1)} style={{...pasta.avaliacao === -1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-success text-white`}>Aprovar</button>
+                            <button onClick={() => this.avaliar(pasta.id_pasta, -1)} style={{...pasta.avaliacao === 1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-danger text-white`}>Reprovar</button>
+                        </div>
+                    }>
                     <div className='my-container'>
                         {!!pasta.nome &&
                         <div className='body'>
                             <div className='my-card col-left'>
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                 <h5>Descrição</h5>
-                                <label>{moment(pasta.data_criacao).format('DD/MM/YYYY')}</label>
+                                <label></label>
                                 </div>
                                 <label className="text-muted mb-4">{pasta.descricao}</label>
                                 <h5>Discussão</h5>
@@ -84,15 +107,19 @@ class SamplePage extends Component {
                             </div>
                             <div className='col-right'>
                                 <div className='my-card card-user'>
-                                    <ModalImage
-                                        images={[pasta.user_img || profile_image]}
-                                        displayIndex={0}
-                                        alt='Imagem do Usuário'
-                                    />
+                                    <div style={{display: 'flex', alignItems: 'center'}}>
+                                        <ModalImage
+                                            images={[pasta.user_img || profile_image]}
+                                            displayIndex={0}
+                                            alt='Imagem do Usuário'
+                                        />
+                                    </div>
                                     <div className='info'>
-                                        <label>{pasta.user_nome}</label>
-                                        <label>{pasta.email}</label>
-                                        <label>{pasta.escolaridade}</label>
+                                        <span style={{fontSize: 12, fontWeight: 'bold'}}>Criador:</span>
+                                        <span style={{fontSize: 12, fontWeight: 'bold'}}>{pasta.user_nome}</span>
+                                        <span>{pasta.email}</span>
+                                        <span>{pasta.escolaridade}</span>
+                                        <span style={{fontSize: 12, fontStyle: 'italic'}}>Criado em: {moment(pasta.data_criacao).format('DD/MM/YYYY')}</span>
                                     </div>
                                 </div>
 

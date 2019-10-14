@@ -24,8 +24,9 @@ class SamplePage extends Component {
     pastas = () => {
         api.get('/pastas')
         .then(res => {
+            console.log(res.data)
             if(res.data.retorno){
-                this.setState({pastas: res.data.pasta})
+                this.setState({pastas: res.data.pastas})
             }else{
 
             }
@@ -67,16 +68,15 @@ class SamplePage extends Component {
                                                         {moment(pasta.data_criacao).format('DD/MM/Y')}
                                                     </h6>
                                                 </td>
-                                                <td>{console.log(pasta.avaliacao)}
-                                                    <button onClick={() => this.avaliar(pasta.id_pasta, +1)} style={{...pasta.avaliacao === -1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-success text-white`}>Aprovar</button>
-                                                    <button onClick={() => this.avaliar(pasta.id_pasta, -1)} style={{...pasta.avaliacao === 1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-danger text-white`}>Reprovar</button>
+                                                <td>
+
                                                 </td>
                                             </tr>
                                         )
                                         }
                                         {!this.state.pastas.length &&
                                             <tr className="unread">
-                                                <td colspan="4">
+                                                <td colSpan="4">
                                                     <span>Tente novamente mais tarde ou tente recarregar a página</span>
                                                 </td>
                                             </tr>

@@ -60,6 +60,9 @@ class MainCard extends Component {
         let cardClass = [this.props.className];
 
         if(this.state.isOption){
+            this.props.cardHeaderRight
+            ? cardHeaderRight = <div className="card-header-right">{this.props.cardHeaderRight}</div>
+            :
             cardHeaderRight = (
                 <div className="card-header-right">
                     <Dropdown alignRight={true} className="btn-group card-option">
