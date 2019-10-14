@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import axios from 'axios'
 import * as actionTypes from "../../../store/actions";
 
 import FacebookLogin from 'react-facebook-login';
@@ -8,6 +7,7 @@ import GoogleLogin from 'react-google-login'
 
 import './../../../assets/scss/style.scss';
 import Aux from "../../../hoc/_Aux";
+import api from '../../../api'
 import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
 
 import logo from '../../../assets/images/logo.png';
@@ -26,7 +26,7 @@ class SignUp extends React.Component {
         email: 'archeros.devs@gmail.com',
         senha: '123',
         persistEmail: false,
-        loading: false 
+        loading: false
     }
 
     responseFacebook = (response) => {
@@ -37,19 +37,15 @@ class SignUp extends React.Component {
     }
 
     handleSubmit = async () => {
-        
         this.setState({loading: true})
-        
-        axios.defaults.baseURL = 'http://peruibemelhor.nodejs7605.kinghost.net:21086/'
 
-        axios.post('signin', {
+        api.post('signin', {
             email : this.state.email,
 	        password : this.state.senha
         })
         .then(res => {
             if(res.data.retorno){
-                axios.defaults.headers.common = {'Authorization': `Bearer ${res.data.token}`}
-                this.props.onSingin(res.data.name, res.data.email, res.data.token)
+                this.props.onSingin(res.data.name, res.data.email, res.data.img, res.data.token)
                 this.props.history.push('/dashboard')
             }else{
                 console.log(res.data.msg)
@@ -154,7 +150,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSingin: (nome, email, token) => dispatch({type: actionTypes.AUTH_SIGNIN, payload: {nome, email, token}}),
+        onSingin: (nome, email, img, token) => dispatch({type: actionTypes.AUTH_SIGNIN, payload: {nome, email, img, token}}),
         onSignOut: (persistEmail) => dispatch({type: actionTypes.AUTH_SIGNOUT, payload: {persist: persistEmail}}),
     }
 };

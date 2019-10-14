@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Table, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {Row, Col, Table, Badge, Tooltip} from 'react-bootstrap';
 import Loader from 'react-loader-spinner'
 import Card from "../Card/Index";
 
@@ -81,9 +81,10 @@ class TableHomologation extends Component {
                                         {
                                         this.state.pasta_homologar.map((pasta, id) =>
                                             <tr className="unread" key={pasta.id_pasta}>
-                                                <td><img className="rounded-circle" style={{width: '40px'}} src={avatar2} alt="activity-user"/></td>
                                                 <td style={{textAlign: 'left'}}>
-                                                    <h6 className="mb-1"><a href={`/admin/pastas/${pasta.id_pasta}`} className="f-12">{pasta.nome}</a></h6>
+                                                    <h6 className="mb-1">
+                                                        <a href={`/admin/pastas/${pasta.id_pasta}`} className="f-12">{pasta.nome}  <Badge variant="secondary">{pasta.categoria}</Badge></a>
+                                                    </h6>
                                                     <p className="m-0">{pasta.discussao}</p>
                                                 </td>
                                                 <td>

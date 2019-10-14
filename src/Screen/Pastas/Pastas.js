@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Table} from 'react-bootstrap';
+import {Row, Col, Table, Badge} from 'react-bootstrap';
 
 import Aux from "../../hoc/_Aux";
 import Card from "../../App/components/Card/Index.js";
@@ -57,14 +57,15 @@ class SamplePage extends Component {
                                         {
                                         this.state.pastas.map((pasta, id) =>
                                             <tr className="unread" key={pasta.id_pasta}>
-                                                <td><img className="rounded-circle" style={{width: '40px'}} src={avatar2} alt="activity-user"/></td>
                                                 <td style={{textAlign: 'left'}}>
-                                                    <h6 className="mb-1"><a href={`/admin/pastas/${pasta.id_pasta}`} className="f-12">{pasta.nome}</a></h6>
+                                                    <h6 className="mb-1">
+                                                        <a href={`/admin/pastas/${pasta.id_pasta}`} className="f-12">{pasta.nome} <Badge variant="secondary">{pasta.categoria}</Badge></a>
+                                                    </h6>
                                                     <p className="m-0">{pasta.discussao}</p>
                                                 </td>
                                                 <td>
                                                     <h6 className="text-muted">
-                                                        <i className="fa fa-circle text-c-yellow f-10 m-r-15"/>
+                                                        <i className="fa fa-circle f-10 m-r-15" style={{color: !!pasta.homologada ? '#1ede1e' : 'yellow'}}/>
                                                         {moment(pasta.data_criacao).format('DD/MM/Y')}
                                                     </h6>
                                                 </td>

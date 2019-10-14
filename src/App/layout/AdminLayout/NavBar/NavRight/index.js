@@ -88,7 +88,7 @@ class NavRight extends Component {
                             </Dropdown.Toggle>
                             <Dropdown.Menu alignRight className="profile-notification">
                                 <div className="pro-head">
-                                    <img src={Avatar2} className="img-radius" alt="User Profile"/>
+                                    <img src={this.props.user_img || Avatar1} className="img-radius" alt="User Profile" style={{border: '1px double white'}}/>
                                     <span style={{color: '#000'}}>{this.props.user_name}</span>
                                     <a href={DEMO.BLANK_LINK} className="dud-logout" style={{color: '#000'}} title="Sair">
                                         <i className="feather icon-log-out"/>
@@ -112,7 +112,8 @@ class NavRight extends Component {
 
 const mapStateToProps = state => {
     return {
-        user_name: state.auth.user_name
+        user_name: state.auth.user_name,
+        user_img: state.auth.user_img
     }
 };
 
