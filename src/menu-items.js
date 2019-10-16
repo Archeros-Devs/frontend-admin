@@ -38,8 +38,8 @@ export default {
             ]
         },
         {
-            id: 'administradores',
-            title: 'Admin',
+            id: 'usuarios',
+            title: 'Usuários',
             type: 'group',
             icon: 'icon-navigation',
             children: [
@@ -49,6 +49,13 @@ export default {
                     type: 'item',
                     url: '/admin',
                     icon: 'feather icon-user',
+                },
+                {
+                    id: 'usuarios',
+                    title: 'Usuários',
+                    type: 'item',
+                    url: '/usuarios',
+                    icon: 'feather icon-users',
                 }
             ]
         },
