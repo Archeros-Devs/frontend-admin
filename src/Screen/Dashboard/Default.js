@@ -3,12 +3,43 @@ import {Row, Col, Card, Table, Tabs, Tab} from 'react-bootstrap';
 
 import Aux from "../../hoc/_Aux";
 import DEMO from "../../store/constant";
+import api from "../../api";
 
 import avatar1 from '../../assets/images/user/avatar-1.jpg';
 import avatar2 from '../../assets/images/user/avatar-2.jpg';
 import avatar3 from '../../assets/images/user/avatar-3.jpg';
 
 class Dashboard extends React.Component {
+    state = {
+        usuarios: 0,
+        admins: 0,
+        pastas: 0,
+        aprovado: 0,
+        pendente: 0,
+        reprovado: 0,
+
+        rank: []
+    }
+
+    componentDidMount() {
+        this.dadosDashboard()
+        this.rankFolders()
+    }
+
+    dadosDashboard = async () => {
+        try {
+            const res = await api.get('/dashboard')
+            this.setState(res.data)
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    rankFolders = async () => {
+        const res = await api.get('/rank')
+        this.setState({rank: res.data})
+    }
+
     render() {
         const tabContent = (
             <Aux>
@@ -69,6 +100,15 @@ class Dashboard extends React.Component {
             </Aux>
         );
 
+        const {
+            usuarios,
+            admins,
+            pastas,
+            aprovado,
+            pendente,
+            reprovado,
+            rank
+        } = this.state
         return (
             <Aux>
                 <Row>
@@ -80,10 +120,10 @@ class Dashboard extends React.Component {
                                         <h5 className="m-0">Administradores</h5>
                                     </div>
                                     <div className="col-auto">
-                                        <label className="label theme-bg2 text-white f-14 f-w-400 float-right">100%</label>
+                                        <label className="label theme-bg2 text-white f-14 f-w-400 float-right">{(admins / usuarios) * 100}%</label>
                                     </div>
                                 </div>
-                                <h2 className="mt-2 f-w-300">1<sub className="text-muted f-14">Adms</sub></h2>
+                                <h2 className="mt-2 f-w-300">{admins}<sub className="text-muted f-14">Admins</sub></h2>
                                 <h6 className="text-muted mt-3 mb-0">Adicionar Administrador</h6>
                                 <i className="fa fa-user text-c-purple f-50"/>
                             </Card.Body>
@@ -97,23 +137,25 @@ class Dashboard extends React.Component {
                                         <i className="fa fa-folder text-primary f-36"/>
                                     </div>
                                     <div className="col text-right">
-                                        <h3>1</h3>
-                                        <h5 className="text-c-green mb-0">+2 <span className="text-muted">Homologação</span></h5>
+                                        <h3><span className="text-muted">Pastas: {pastas}</span></h3>
+                                        <h5 className="text-c-green mb-0">
+                                            +{pendente} <span className="text-muted">Homologar</span>
+                                        </h5>
                                     </div>
                                 </div>
                             </Card.Body>
                             <Card.Body>
                                 <div className="row align-items-center justify-content-center card-active">
                                     <div className="col-6">
-                                        <h6 className="text-center m-b-10"><span className="text-muted m-r-5">Target:</span>35,098</h6>
+                                        <h6 className="text-center m-b-10"><span className="text-muted m-r-5">Reprovados:</span>{reprovado}</h6>
                                         <div className="progress">
-                                            <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '60%', height: '6px'}} aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"/>
+                                            <div className="progress-bar progress-c-theme" role="progressbar" style={{width: `${reprovado/pastas*100}%`, height: '6px'}} aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"/>
                                         </div>
                                     </div>
                                     <div className="col-6">
-                                        <h6 className="text-center  m-b-10"><span className="text-muted m-r-5">Duration:</span>350</h6>
+                                        <h6 className="text-center  m-b-10"><span className="text-muted m-r-5">Aprovados:</span>{aprovado}</h6>
                                         <div className="progress">
-                                            <div className="progress-bar progress-c-theme2" role="progressbar" style={{width: '45%', height: '6px'}} aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"/>
+                                            <div className="progress-bar progress-c-theme2" role="progressbar" style={{width: `${aprovado/pastas*100}%`, height: '6px'}} aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"/>
                                         </div>
                                     </div>
                                 </div>
@@ -128,7 +170,7 @@ class Dashboard extends React.Component {
                                         <i className="feather icon-users f-30 text-c-green"/>
                                     </div>
                                     <div className="col">
-                                        <h3 className="f-w-300">1</h3>
+                                        <h3 className="f-w-300">{usuarios}</h3>
                                         <span className="d-block text-uppercase">Total de Usuários</span>
                                     </div>
                                 </div>
@@ -139,7 +181,7 @@ class Dashboard extends React.Component {
                                         <i className="feather icon-folder f-30 text-c-blue"/>
                                     </div>
                                     <div className="col">
-                                        <h3 className="f-w-300">3</h3>
+                                        <h3 className="f-w-300">{pastas}</h3>
                                         <span className="d-block text-uppercase">Total de Pastas</span>
                                     </div>
                                 </div>
@@ -164,49 +206,26 @@ class Dashboard extends React.Component {
                                 </div>
 
                                 <div className="row">
-                                    <div className="col-xl-12">
-                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>Ruinas do Abarebebe</h6>
-                                        <h6 className="align-items-center float-right">384</h6>
-                                        <div className="progress m-t-30 m-b-20" style={{height: '6px'}}>
-                                            <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '70%'}} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"/>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-xl-12">
-                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>Praia Do Centro</h6>
-                                        <h6 className="align-items-center float-right">145</h6>
-                                        <div className="progress m-t-30  m-b-20" style={{height: '6px'}}>
-                                            <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '35%'}} aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"/>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-xl-12">
-                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>Praia Do Centro</h6>
-                                        <h6 className="align-items-center float-right">24</h6>
-                                        <div className="progress m-t-30  m-b-20" style={{height: '6px'}}>
-                                            <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"/>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-xl-12">
-                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>-</h6>
-                                        <h6 className="align-items-center float-right">1</h6>
-                                        <div className="progress m-t-30  m-b-20" style={{height: '6px'}}>
-                                            <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '10%'}} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"/>
-                                        </div>
-                                    </div>
-                                    <div className="col-xl-12">
-                                        <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>-</h6>
-                                        <h6 className="align-items-center float-right">0</h6>
-                                        <div className="progress m-t-30  m-b-5" style={{height: '6px'}}>
-                                            <div className="progress-bar" role="progressbar" style={{width: '0%'}} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"/>
-                                        </div>
-                                    </div>
+                                    {rank.map(pasta => {
+                                        let pos = pasta.avaliacoes_positivas + 0 // +0 converte null para 0
+                                        let neg = pasta.avaliacoes_negativas + 0
+                                        if(neg === 0) neg = 1
+                                        return (
+                                            <div className="col-xl-12">
+                                                <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow"/>{pasta.nome}</h6>
+                                                <h6 className="align-items-center float-right">{pos + 0}</h6>
+                                                <div className="progress m-t-30 m-b-20" style={{height: '6px'}}>
+                                                    <div className="progress-bar progress-c-theme" role="progressbar" style={{width: `${pos / neg * 100}%`}} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"/>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                    }
                                 </div>
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md={6} xl={8} className='m-b-30'>
+                    {/*<Col md={6} xl={8} className='m-b-30'>
                         <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
                             <Tab eventKey="today" title="Hoje">
                                 {tabContent}
@@ -218,7 +237,7 @@ class Dashboard extends React.Component {
                                 {tabContent}
                             </Tab>
                         </Tabs>
-                    </Col>
+                    </Col>*/}
                 </Row>
             </Aux>
         );

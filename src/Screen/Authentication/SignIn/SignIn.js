@@ -91,12 +91,11 @@ class SignUp extends React.Component {
                                         <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" value={this.state.persistEmail} onChange={(e) => this.handleInput(e)}/>
                                             <label htmlFor="checkbox-fill-a1" className="cr"> Salvar Credenciais</label>
                                     </div>
-                                
                                     <Button variant= "black"
                                         onClick={()=> this.handleSubmit()}
                                     >
                                         {this.state.loading === true ? "": "Entrar"}
-                                        {this.state.loading === true 
+                                        {this.state.loading === true
                                         ?
                                             <Spinner
                                             as="span"
