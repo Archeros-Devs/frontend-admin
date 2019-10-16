@@ -33,9 +33,9 @@ $Menu-collapsed-width: 80px;
 
 // color list for build layouts
 // temp variables
-$theme-color: linear-gradient(-135deg, #ffde31 0%, #fc4700 100%);
-$theme-color2: linear-gradient(-135deg, #8dc5eb 0%, #034191 100%);
-$primary-color: #fbff00;
+$theme-color: #f78d3b ;
+$theme-color2: #0077c2;
+$primary-color:  #0077c2;
 $warning-color: #fbff00;
 $danger-color: #f44236;
 $success-color: #5fb2e9;
@@ -113,5 +113,7 @@ $alert-color-level: 6 !default;
 
 // Peruibe Colors 
 $button-colors: #ff0000;
+$authentication-color: linear-gradient(-135deg, #ffde31 0%, #fc4700 100%);
+$authentication-color2: linear-gradient(-135deg, #8dc5eb 0%, #034191 100%);
 
 
