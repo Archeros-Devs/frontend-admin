@@ -50,7 +50,9 @@ class SamplePage extends Component {
                             reload
                             pagination={{itemsCountPerPage: 5, totalItemsCount: 2}}
                             loading={this.state.loading}
-                            onCardReload={() => {}}>
+                            cardHeaderRight={
+                                <i className="fa fa-plus f-20 m-r-15"/>
+                            }>
                             <div>
                                 <Table responsive hover style={{marginBottom: 0}}>
                                     <tbody>
