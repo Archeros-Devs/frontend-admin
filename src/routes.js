@@ -49,7 +49,7 @@ const routes = [
     { path: '/admin' , exact: true, name: 'Admin', component: Admin },
     { path: '/perfil' , exact: true, name: 'Perfil', component: Perfil },
     { path: '/usuarios' , exact: true, name: 'Users', component: Users },
-    
+     
     { path: '/basic/button', exact: true, name: 'Basic Button', component: UIBasicButton },
     { path: '/basic/badges', exact: true, name: 'Basic Badges', component: UIBasicBadges },
     { path: '/basic/breadcrumb-paging', exact: true, name: 'Basic Breadcrumb Pagination', component: UIBasicBreadcrumbPagination },
