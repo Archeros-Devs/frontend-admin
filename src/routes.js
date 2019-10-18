@@ -11,11 +11,13 @@ const DashboardDefault = React.lazy(() => import('./Screen/Dashboard/Default'));
 const Homologar = React.lazy(() => import('./Screen/Pastas/Homologacao'));
 const Pasta = React.lazy(() => import('./Screen/Pastas/Pasta'));
 const Pastas = React.lazy(() => import('./Screen/Pastas/Pastas'));
+const Criar = React.lazy(() => import('./Screen/Pastas/Criar'));
 
 const Admin = React.lazy(() => import('./Screen/Administradores/Index' ));
 
 const Perfil = React.lazy(() => import('./Screen/Perfil/Index'));
 const Users = React.lazy(() => import('./Screen/Users/Index'));
+
 
 
 
@@ -44,11 +46,15 @@ const OtherDocs = React.lazy(() => import('./Demo/Other/Docs'));
 const routes = [
     { path: '/dashboard', exact: true, name: 'Dashboard', component: DashboardDefault },
     { path: '/pastas', exact: true, name: 'Pastas', component: Pastas },
+    { path: '/criar', exact: true, name: 'Criar', componente: Criar},
     { path: '/pastas/homologar', exact: true, name: 'Homologar', component: Homologar },
     { path: '/pastas/:id_pasta', exact: true, name: 'Pasta', component: Pasta },
+    
     { path: '/admin' , exact: true, name: 'Admin', component: Admin },
     { path: '/perfil' , exact: true, name: 'Perfil', component: Perfil },
     { path: '/usuarios' , exact: true, name: 'Users', component: Users },
+   
+
      
     { path: '/basic/button', exact: true, name: 'Basic Button', component: UIBasicButton },
     { path: '/basic/badges', exact: true, name: 'Basic Badges', component: UIBasicBadges },
