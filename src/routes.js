@@ -9,9 +9,9 @@ const DashboardDefault = React.lazy(() => import('./Screen/Dashboard/Default'));
 
 // PASTAS
 const Homologar = React.lazy(() => import('./Screen/Pastas/Homologacao'));
-const Pasta = React.lazy(() => import('./Screen/Pastas/Pasta'));
+const PastasNovo = React.lazy(() => import('./Screen/Pastas/Novo'));
 const Pastas = React.lazy(() => import('./Screen/Pastas/Pastas'));
-const Criar = React.lazy(() => import('./Screen/Pastas/Criar'));
+const Pasta = React.lazy(() => import('./Screen/Pastas/Pasta'));
 
 const Admin = React.lazy(() => import('./Screen/Administradores/Index' ));
 
@@ -46,14 +46,12 @@ const OtherDocs = React.lazy(() => import('./Demo/Other/Docs'));
 const routes = [
     { path: '/dashboard', exact: true, name: 'Dashboard', component: DashboardDefault },
     { path: '/pastas', exact: true, name: 'Pastas', component: Pastas },
-    { path: '/criar', exact: true, name: 'Criar', componente: Criar},
+    { path: '/pastas/nova', exact: true, name: 'Nova Pasta', component: PastasNovo},
     { path: '/pastas/homologar', exact: true, name: 'Homologar', component: Homologar },
-    { path: '/pastas/:id_pasta', exact: true, name: 'Pasta', component: Pasta },
-    
+    { path: '/pasta/:id_pasta', exact: true, name: 'Pasta', component: Pasta },
     { path: '/admin' , exact: true, name: 'Admin', component: Admin },
     { path: '/perfil' , exact: true, name: 'Perfil', component: Perfil },
     { path: '/usuarios' , exact: true, name: 'Users', component: Users },
-   
 
      
     { path: '/basic/button', exact: true, name: 'Basic Button', component: UIBasicButton },
@@ -67,7 +65,6 @@ const routes = [
     { path: '/charts/nvd3', exact: true, name: 'Nvd3 Chart', component: Nvd3Chart },
     { path: '/maps/google-map', exact: true, name: 'Google Map', component: GoogleMap },
     { path: '/sample-page', exact: true, name: 'Sample Page', component: OtherSamplePage },
-    { path: '/docs', exact: true, name: 'Documentation', component: OtherDocs },
 ];
 
 export default routes;

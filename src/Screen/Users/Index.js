@@ -54,7 +54,7 @@ class SamplePage extends Component {
                             pagination={{ itemsCountPerPage: 5, totalItemsCount: 2 }}
                             loading={loading}
                             cardHeaderRight={
-                                <a href='/usuarios/criar'>
+                                <a href='/usuarios/novo'>
                                     <i className="fa fa-plus f-20 m-r-15" />
                                 </a>
                             }>
@@ -62,7 +62,7 @@ class SamplePage extends Component {
                                 <Table responsive hover style={{ marginBottom: 0 }}>
                                     <thead>
                                         <tr>
-                                            <th style={{display: 'flex', justifyContent: 'center'}}>Imagem</th>
+                                            <th></th>
                                             <th>Nome</th>
                                             <th>Escolaridade</th>
                                             <th>Profissão</th>
@@ -93,7 +93,7 @@ class SamplePage extends Component {
                                                         </h6>
                                                         <p className="m-0">{usuario.email}</p>
                                                     </td>
-                                                    <td>
+                                                    <td style={{ textAlign: 'left' }}>
                                                         <p className="m-0">{usuario.escolaridade}</p>
                                                     </td>
                                                     <td>

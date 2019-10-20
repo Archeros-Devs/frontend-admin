@@ -51,7 +51,7 @@ class SamplePage extends Component {
                             pagination={{ itemsCountPerPage: 5, totalItemsCount: 2 }}
                             loading={this.state.loading}
                             cardHeaderRight={
-                                <a href='/pastas/criar'>
+                                <a href='/admin/pastas/nova'>
                                     <i className="fa fa-plus f-20 m-r-15" />
                                 </a>
                             }>
@@ -63,7 +63,7 @@ class SamplePage extends Component {
                                                 <tr className="unread" key={pasta.id_pasta}>
                                                     <td style={{ textAlign: 'left' }}>
                                                         <h6 className="mb-1">
-                                                            <a href={`/admin/pastas/${pasta.id_pasta}`} className="f-12">{pasta.nome} <Badge variant="secondary">{pasta.categoria}</Badge></a>
+                                                            <a href={`/admin/pasta/${pasta.id_pasta}`} className="f-12">{pasta.nome} <Badge variant="secondary">{pasta.categoria}</Badge></a>
                                                         </h6>
                                                         <p className="m-0">{pasta.discussao}</p>
                                                     </td>

@@ -217,9 +217,10 @@ class Dashboard extends React.Component {
                                     {rank.map((pasta, index) => {
                                         let pos = pasta.avaliacoes_positivas + 0 // +0 converte null para 0
                                         let neg = pasta.avaliacoes_negativas + 0
+                                        console.log(pasta)
                                         return (
                                             <div className="col-xl-12" key={index}>
-                                                <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow" />{pasta.nome}</h6>
+                                                <a href={`pasta/${pasta.id_pasta}`} className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow" />{pasta.nome}</a>
                                                 <h6 className="align-items-center float-right">{pos + 0}</h6>
                                                 <div className="progress m-t-30 m-b-20" style={{ height: '6px' }}>
                                                     <div className="progress-bar progress-c-theme" role="progressbar" style={{ width: `${pos * 100 / (pos + neg)}%` }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" />
