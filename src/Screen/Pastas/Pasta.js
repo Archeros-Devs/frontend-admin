@@ -42,7 +42,7 @@ class SamplePage extends Component {
             user_nome: "Archeros Devs"
         **/
         let id_pasta = this.state.id_pasta
-        api.get(`/pastas/${id_pasta}`)
+        api().get(`/pastas/${id_pasta}`)
         .then(res => {
             if(res.data.retorno){
                 console.info(res.data)
@@ -59,7 +59,7 @@ class SamplePage extends Component {
 
     avaliar = (id_pasta, avaliacao) => {
         try {
-            api.put(`/pastas/${id_pasta}/avaliar`, {
+            api().put(`/pastas/${id_pasta}/avaliar`, {
                 avaliacao
             })
             .then(res => {

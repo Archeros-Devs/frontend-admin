@@ -25,7 +25,7 @@ class TableHomologation extends Component {
 
     getPastaUnauthorized = async () => {
         try {
-            const res = await api.get(`pastas/homologar`)
+            const res = await api().get(`pastas/homologar`)
             if(res.data.retorno){
                 this.setState({ pasta_homologar: res.data.pastas })
                 console.log(res.data.pastas)
@@ -41,7 +41,7 @@ class TableHomologation extends Component {
     avaliar = async (id_pasta, avaliacao) => {
         console.log(this.state.pasta_homologar)
         try {
-            const res = await api.put(`/pastas/${id_pasta}/avaliar`, {
+            const res = await api().put(`/pastas/${id_pasta}/avaliar`, {
                 avaliacao
             })
 

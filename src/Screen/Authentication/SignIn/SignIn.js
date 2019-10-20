@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actionTypes from "../../../store/actions";
 
 import FacebookLogin from 'react-facebook-login';
@@ -7,7 +7,8 @@ import GoogleLogin from 'react-google-login'
 
 import './../../../assets/scss/style.scss';
 import Aux from "../../../hoc/_Aux";
-import api from '../../../api'
+import api from '../../../api';
+import { store } from "../../../store/storage";
 import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
 
 import logo from '../../../assets/images/logo.png';
@@ -17,7 +18,7 @@ import Spinner from 'react-bootstrap/Spinner';
 
 
 class SignUp extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.props.onSignOut(this.state.persistEmail)
     }
@@ -37,74 +38,75 @@ class SignUp extends React.Component {
     }
 
     handleSubmit = async () => {
-        this.setState({loading: true})
+        this.setState({ loading: true })
 
-        api.post('signin', {
-            email : this.state.email,
-	        password : this.state.senha
-        })
-        .then(res => {
-            if(res.data.retorno){
+        try {
+            const res = await api().post('signin', {
+                email: this.state.email,
+                password: this.state.senha
+            })
+            if (res.data.retorno) {
                 this.props.onSingin(res.data.name, res.data.email, res.data.img, res.data.token)
                 this.props.history.push('/dashboard')
-            }else{
+            } else {
                 console.log(res.data.msg)
             }
-        }).catch(err => console.log(err))
+        } catch (err) {
+            console.error(err)
+        }
 
-        this.setState({loading: false})
-
+        this.setState({ loading: false })
     }
 
     handleInput = (e) => {
         const value = e.target.checked
-        this.setState({persistEmail: value})
+        this.setState({ persistEmail: value })
     }
 
-    render () {
-        return(
+    render() {
+        return (
             <Aux>
-                <Breadcrumb/>
+                <Breadcrumb />
                 <div className="auth-wrapper">
                     <div className="auth-content">
                         <div className="auth-bg">
-                            <span className="r"/>
-                            <span className="r s"/>
-                            <span className="r s"/>
-                            <span className="r"/>
+                            <span className="r" />
+                            <span className="r s" />
+                            <span className="r s" />
+                            <span className="r" />
                         </div>
                         <div className="card" >
                             <div className="card-body text-center">
                                 <div className="mb-4">
-                                    <img  style={{width: '200px'}} src={logo} alt="logo"/>
+                                    <img style={{ width: '200px' }} src={logo} alt="logo" />
                                 </div>
                                 <div className="input-group mb-3">
                                     <input type="email" className="form-control" placeholder="E-mail" required
-                                        value={this.state.email} onChange={(event)=>this.setState({email: event.target.value})}/>
+                                        value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} />
                                 </div>
                                 <div className="input-group mb-4">
                                     <input type="password" className="form-control" placeholder="Senha" required
-                                        value={this.state.senha} onChange={(event)=>this.setState({senha: event.target.value})}/>
+                                        value={this.state.senha} onChange={(event) => this.setState({ senha: event.target.value })} />
                                 </div>
                                 <div className="form-group text-center align-items-center justify-content-center">
                                     <div className="checkbox checkbox-fill d-inline">
-                                        <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" value={this.state.persistEmail} onChange={(e) => this.handleInput(e)}/>
-                                            <label htmlFor="checkbox-fill-a1" className="cr"> Salvar Credenciais</label>
+                                        <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" value={this.state.persistEmail} onChange={(e) => this.handleInput(e)} />
+                                        <label htmlFor="checkbox-fill-a1" className="cr"> Salvar Credenciais</label>
                                     </div>
-                                    <Button variant= "black"
-                                        onClick={()=> this.handleSubmit()}
+                                    <Button variant="black"
+                                        onClick={() => this.handleSubmit()}
                                     >
-                                        {this.state.loading === true ? "": "Entrar"}
+                                        {this.state.loading === true ? "" : "Entrar"}
                                         {this.state.loading === true
-                                        ?
+                                            ?
                                             <Spinner
-                                            as="span"
-                                            animation="grow"
-                                            size="sm"
-                                            role="status"
-                                            aria-hidden="true"
-                                        />
-                                        : ""
+                                                as="span"
+                                                animation="grow"
+                                                size="sm"
+                                                role="status"
+                                                aria-hidden="true"
+                                            />
+                                            : ""
                                         }
                                     </Button>
 
@@ -149,9 +151,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSingin: (nome, email, img, token) => dispatch({type: actionTypes.AUTH_SIGNIN, payload: {nome, email, img, token}}),
-        onSignOut: (persistEmail) => dispatch({type: actionTypes.AUTH_SIGNOUT, payload: {persist: persistEmail}}),
+        onSingin: (nome, email, img, token) => dispatch({ type: actionTypes.AUTH_SIGNIN, payload: { nome, email, img, token } }),
+        onSignOut: (persistEmail) => dispatch({ type: actionTypes.AUTH_SIGNOUT, payload: { persist: persistEmail } }),
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

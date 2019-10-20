@@ -22,7 +22,7 @@ class SamplePage extends Component {
     }
 
     pastas = () => {
-        api.get('/pastas')
+        api().get('/pastas')
             .then(res => {
                 console.log(res.data)
                 if (res.data.retorno) {

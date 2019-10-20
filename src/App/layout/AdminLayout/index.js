@@ -1,8 +1,10 @@
 import React, { Component, Suspense } from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
-import {connect} from 'react-redux';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Fullscreen from "react-full-screen";
 import windowSize from 'react-window-size';
+
+import { store } from '../../../store/storage'
 
 import Navigation from './Navigation';
 import NavBar from './NavBar';
@@ -16,7 +18,7 @@ import './app.scss';
 
 class AdminLayout extends Component {
     security = () => {
-        
+
     }
 
     fullScreenExitHandler = () => {
@@ -52,9 +54,13 @@ class AdminLayout extends Component {
                     path={route.path}
                     exact={route.exact}
                     name={route.name}
-                    render={props => (
-                        <route.component {...props} />
-                    )} />
+                    render={props => {
+                        if (!store.getState().auth.token) {
+                            return <Redirect to="/auth/signin" />
+                        } else {
+                            return <route.component {...props} />
+                        }
+                    }} />
             ) : (null);
         });
 
@@ -70,7 +76,7 @@ class AdminLayout extends Component {
                                     <Breadcrumb />
                                     <div className="main-body">
                                         <div className="page-wrapper">
-                                            <Suspense fallback={<Loader/>}>
+                                            <Suspense fallback={<Loader />}>
                                                 <Switch>
                                                     {menu}
                                                     <Redirect from="/" to={this.props.defaultPath} />
@@ -100,9 +106,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFullScreenExit: () => dispatch({type: actionTypes.FULL_SCREEN_EXIT}),
-        onComponentWillMount: () => dispatch({type: actionTypes.COLLAPSE_MENU})
+        onFullScreenExit: () => dispatch({ type: actionTypes.FULL_SCREEN_EXIT }),
+        onComponentWillMount: () => dispatch({ type: actionTypes.COLLAPSE_MENU })
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (windowSize(AdminLayout));
+export default connect(mapStateToProps, mapDispatchToProps)(windowSize(AdminLayout));

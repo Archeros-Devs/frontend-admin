@@ -28,7 +28,7 @@ class Dashboard extends React.Component {
 
     dadosDashboard = async () => {
         try {
-            const res = await api.get('/dashboard')
+            const res = await api().get('/dashboard')
             this.setState(res.data)
         } catch (err) {
             console.error(err)
@@ -36,7 +36,7 @@ class Dashboard extends React.Component {
     }
 
     rankFolders = async () => {
-        const res = await api.get('/rank')
+        const res = await api().get('/rank')
         this.setState({ rank: res.data })
     }
 
@@ -214,11 +214,11 @@ class Dashboard extends React.Component {
                                 </div>
 
                                 <div className="row">
-                                    {rank.map(pasta => {
+                                    {rank.map((pasta, index) => {
                                         let pos = pasta.avaliacoes_positivas + 0 // +0 converte null para 0
                                         let neg = pasta.avaliacoes_negativas + 0
                                         return (
-                                            <div className="col-xl-12">
+                                            <div className="col-xl-12" key={index}>
                                                 <h6 className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow" />{pasta.nome}</h6>
                                                 <h6 className="align-items-center float-right">{pos + 0}</h6>
                                                 <div className="progress m-t-30 m-b-20" style={{ height: '6px' }}>
