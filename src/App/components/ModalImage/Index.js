@@ -16,10 +16,18 @@ export default class LightboxExample extends Component {
  
     return (
       <div>
-        <div className='img-container'>
+        <div className='img-container' style={{cursor: 'pointer'}}>
         {images &&
             images.map((image, id) => {
-                return  <img className='img' src={image} alt={`${alt}#${id}`} key={id} onClick={() => this.setState({ isOpen: true, photoIndex: id })}/>
+                return <Image
+                    className='img'
+                    style={this.props.imgStyle}
+                    src={image}
+                    alt={`${alt}#${id}`}
+                    key={id}
+                    onClick={() => this.setState({ isOpen: true, photoIndex: id })}
+                    roundedCircle={this.props.roundedCircle}
+                />
             })
         }
         </div>

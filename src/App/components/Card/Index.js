@@ -61,7 +61,10 @@ class MainCard extends Component {
 
         if(this.state.isOption){
             this.props.cardHeaderRight
-            ? cardHeaderRight = <div className="card-header-right">{this.props.cardHeaderRight}</div>
+             ? cardHeaderRight =
+                <div style={{right: 10, display: 'inline-block', float: 'right', padding: 0, position: 'absolute'}}>
+                    {this.props.cardHeaderRight}
+                </div>
             :
             cardHeaderRight = (
                 <div className="card-header-right">
