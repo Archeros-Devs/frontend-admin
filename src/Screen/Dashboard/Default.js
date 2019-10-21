@@ -132,7 +132,7 @@ class Dashboard extends React.Component {
                         </a>
                     </Col>
                     <Col md={6} xl={4}>
-                        <a href='/pastas/homologar'>
+                        <a href='/admin/pastas/homologar'>
                             <Card className='card-social'>
                                 <Card.Body className='border-bottom'>
                                     <div className="row align-items-center justify-content-center">
@@ -168,7 +168,7 @@ class Dashboard extends React.Component {
                     </Col>
                     <Col md={6} xl={4}>
                         <Card>
-                            <a href='/usuarios'>
+                            <a href='/admin/usuarios'>
                                 <Card.Body className='border-bottom'>
                                     <div className="row d-flex align-items-center">
                                         <div className="col-auto">
@@ -181,7 +181,7 @@ class Dashboard extends React.Component {
                                     </div>
                                 </Card.Body>
                             </a>
-                            <a href='/pastas'>
+                            <a href='/admin/pastas'>
                                 <Card.Body>
                                     <div className="row d-flex align-items-center">
                                         <div className="col-auto">
@@ -220,7 +220,7 @@ class Dashboard extends React.Component {
                                         console.log(pasta)
                                         return (
                                             <div className="col-xl-12" key={index}>
-                                                <a href={`pasta/${pasta.id_pasta}`} className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow" />{pasta.nome}</a>
+                                                <a href={`/admin/pasta/${pasta.id_pasta}`} className="align-items-center float-left"><i className="fa fa-star f-10 m-r-10 text-c-yellow" />{pasta.nome}</a>
                                                 <h6 className="align-items-center float-right">{pos + 0}</h6>
                                                 <div className="progress m-t-30 m-b-20" style={{ height: '6px' }}>
                                                     <div className="progress-bar progress-c-theme" role="progressbar" style={{ width: `${pos * 100 / (pos + neg)}%` }} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" />
