@@ -4,6 +4,8 @@ import Card from '../../App/components/Card/Index'
 
 import Aux from "../../hoc/_Aux";
 
+import Api from "../../api";
+
 class NovaPasta extends React.Component {
     constructor(props) {
         super(props);
@@ -12,7 +14,21 @@ class NovaPasta extends React.Component {
 
     state = {
         loading: false,
-        selectedFile: []
+        selectedFile: [],
+        categorias: [],
+    }
+    componentDidMount() {
+        this.pegar_cat()
+    }
+
+    pegar_cat = () => {
+        Api().get('/categorias')    
+            .then(res => {
+                this.setState({categorias: res.data })
+            })
+            .catch(erro => {
+                console.log(erro)
+            })
     }
 
     handleFiles = (e) => {
@@ -23,7 +39,7 @@ class NovaPasta extends React.Component {
     }
 
     render() {
-        const { loading, selectedFile } = this.state
+        const { loading, selectedFile, categorias } = this.state
         return (
             <Aux>
                 <Row>
@@ -53,11 +69,9 @@ class NovaPasta extends React.Component {
                                         <Form.Group controlId="novaPasta.categoria">
                                             <Form.Label>Categoria</Form.Label>
                                             <Form.Control as="select">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                                {
+                                                    categorias.map((cat, index) => <option key={index} value={`${cat.id_categoria}`}>{cat.categoria}</option>)
+                                                }
                                             </Form.Control>
                                         </Form.Group>
                                         <Form.Group controlId="novaPasta.fotos">
@@ -93,7 +107,7 @@ class NovaPasta extends React.Component {
                                         </Form.Group>
                                     </Col>
                                 </Row>
-                                <Row style={{justifyContent: 'flex-end'}}>
+                                <Row style={{ justifyContent: 'flex-end' }}>
                                     <Button variant="primary" type="submit">
                                         Salvar
                                     </Button>
