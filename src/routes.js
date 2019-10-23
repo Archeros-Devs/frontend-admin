@@ -12,7 +12,7 @@ const Homologar = React.lazy(() => import('./Screen/Pastas/Homologacao'));
 const PastasNovo = React.lazy(() => import('./Screen/Pastas/Novo'));
 const Pastas = React.lazy(() => import('./Screen/Pastas/Pastas'));
 const Pasta = React.lazy(() => import('./Screen/Pastas/Pasta'));
-
+const NovoAdmin = React.lazy(() => import('./Screen/Administradores/NovoAdmin'));
 const Admin = React.lazy(() => import('./Screen/Administradores/Index' ));
 
 const Perfil = React.lazy(() => import('./Screen/Perfil/Index'));
@@ -49,6 +49,7 @@ const routes = [
     { path: '/pastas/nova', exact: true, name: 'Nova Pasta', component: PastasNovo},
     { path: '/pastas/homologar', exact: true, name: 'Homologar', component: Homologar },
     { path: '/pasta/:id_pasta', exact: true, name: 'Pasta', component: Pasta },
+    { path: '/admin/novo', exact: true, name: 'Novo Admin', component: NovoAdmin},
     { path: '/admin' , exact: true, name: 'Admin', component: Admin },
     { path: '/perfil' , exact: true, name: 'Perfil', component: Perfil },
     { path: '/usuarios' , exact: true, name: 'Users', component: Users },
