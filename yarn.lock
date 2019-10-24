@@ -8507,6 +8507,13 @@ react-full-screen@^0.2.4:
     "@types/react" "*"
     fscreen "^1.0.1"
 
+react-google-autocomplete@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-google-autocomplete/-/react-google-autocomplete-1.1.2.tgz#e64a90ed83499b6b232cd10456f3e430c1a7780e"
+  integrity sha512-J/0sPcKrYnc3lDJapI82zpB/Kbc3LnuhT6F+1s8ybi8X42DB7EqtYEUpcgv3//daWsZ/YLeRjFzZWb2IO89xjA==
+  dependencies:
+    prop-types "^15.5.0"
+
 react-google-login@^5.0.5:
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/react-google-login/-/react-google-login-5.0.5.tgz#b327a0ef1d6f466088c1a29dea0a6c29978158dc"

@@ -1,5 +1,8 @@
 import React from 'react';
 import { Row, Col, Form, Button, InputGroup, FormControl, DropdownButton, Dropdown } from 'react-bootstrap';
+import { Map, Marker, GoogleApiWrapper, InfoWindow, Polyline, Polygon } from 'google-maps-react';
+import Autocomplete from 'react-google-autocomplete';
+
 import Card from '../../App/components/Card/Index'
 
 import Aux from "../../hoc/_Aux";
@@ -16,15 +19,17 @@ class NovaPasta extends React.Component {
         loading: false,
         selectedFile: [],
         categorias: [],
+        LatLng: {}
     }
+
     componentDidMount() {
         this.pegar_cat()
     }
 
     pegar_cat = () => {
-        Api().get('/categorias')    
+        Api().get('/categorias')
             .then(res => {
-                this.setState({categorias: res.data })
+                this.setState({ categorias: res.data })
             })
             .catch(erro => {
                 console.log(erro)
@@ -39,7 +44,7 @@ class NovaPasta extends React.Component {
     }
 
     render() {
-        const { loading, selectedFile, categorias } = this.state
+        const { loading, selectedFile, categorias, LatLng } = this.state
         return (
             <Aux>
                 <Row>
@@ -107,10 +112,29 @@ class NovaPasta extends React.Component {
                                         </Form.Group>
                                     </Col>
                                 </Row>
-                                <Row style={{ justifyContent: 'flex-end' }}>
-                                    <Button variant="primary" type="submit">
-                                        Salvar
-                                    </Button>
+                                <Row>
+                                    <Col md={6}>
+                                        <Form.Group controlId="exampleForm.endereco">
+                                            <Form.Label>Endereço</Form.Label>
+                                            <Autocomplete
+                                                className='form-control'
+                                                style={{ width: '100%' }}
+                                                placeholder=''
+                                                onPlaceSelected={(place) => {
+                                                    console.log(place);
+                                                }}
+                                                types={['address']}
+                                                componentRestrictions={{ country: "br" }}
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col md={6} style={{ display: 'flex', justifyContent: 'flex-end', alignItems:'flex-end' }}>
+                                        <Form.Group controlId="exampleForm.submit">
+                                        <Button variant="primary" type="submit" style={{margin:0}}>
+                                            Salvar
+                                        </Button>
+                                        </Form.Group>
+                                    </Col>
                                 </Row>
                             </div>
                         </Card>
@@ -121,4 +145,8 @@ class NovaPasta extends React.Component {
     }
 }
 
-export default NovaPasta;
+export default GoogleApiWrapper(
+    (props) => ({
+        apiKey: 'AIzaSyDbnh6IAY2xsdYRh6o3lU6vvLheCKsAUpk',
+        language: props.language
+    }))(NovaPasta);
