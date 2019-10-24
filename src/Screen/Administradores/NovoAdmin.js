@@ -29,7 +29,7 @@ class NovoAdmin extends React.Component {
                 <Row>
                     <Col>
                         <Card className=''
-                            title={'Nova Pasta'}
+                            title={'Adicionar Novo Administrador'}
                             bodyClass={'px-0 py-0'}
                             isOption
                             fullscreen
@@ -64,7 +64,7 @@ class NovoAdmin extends React.Component {
                                     <Col md={6}>
                                         <Form.Group controlId="novaPasta.email">
                                             <Form.Label>Email</Form.Label>
-                                            <Form.Control type="email" placeholder="Digite Seu Email" />
+                                            <Form.Control type="email" placeholder="Email" />
                                         </Form.Group>
                                     </Col>
                                     <Col md={3}>
@@ -77,9 +77,8 @@ class NovoAdmin extends React.Component {
                                         <Form.Group controlId="novaPasta.usuario">
                                             <Form.Label>Usuario</Form.Label>
                                             <Form.Control as="select" className="mb-3">
-                                                <option value='1'>Usuario Comum</option>
-                                                <option value='2'>Administrador</option>
-                                                <option value='3'>Super Administrador</option>
+                                                <option value='1'>Administrador</option>
+                                                <option value='2'>Super Administrador</option>
                                             </Form.Control>
                                         </Form.Group>
                                     </Col>
