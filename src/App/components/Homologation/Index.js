@@ -17,17 +17,22 @@ class TableHomologation extends Component {
     state = {
         pasta_homologar: [],
         loading: true,
+
+        currentPage: 1,
+        total: 1,
+        limite: 10,
     }
 
     componentDidMount(){
         this.getPastaUnauthorized()
     }
 
-    getPastaUnauthorized = async () => {
+    getPastaUnauthorized = async (currentPage = 1) => {
+        this.setState({loading: true})
         try {
-            const res = await api().get(`pastas/homologar`)
+            const res = await api().get(`pastas/homologar?page=${currentPage}&limite=${this.state.limite}`)
             if(res.data.retorno){
-                this.setState({ pasta_homologar: res.data.pastas })
+                this.setState({ pasta_homologar: res.data.pastas, total: res.data.total, loading: false }, this.forceUpdate())
                 console.log(res.data.pastas)
             }else{
                 console.log(res.data.msg)
@@ -35,7 +40,6 @@ class TableHomologation extends Component {
         } catch (error) {
             console.error(error)
         }
-        this.setState({loading: false})
     }
 
     avaliar = async (id_pasta, avaliacao) => {
@@ -61,6 +65,7 @@ class TableHomologation extends Component {
     }
 
     render() {
+        const { total, limite, loading } = this.state
         return (
             <Aux>
                 <Row>
@@ -72,9 +77,10 @@ class TableHomologation extends Component {
                         isOption
                         fullscreen
                         reload
-                        pagination={{itemsCountPerPage: 5, totalItemsCount: 2}}
-                        loading={this.state.loading}
-                        onCardReload={this.getPastaUnauthorized}>
+                        pagination={{ itemsCountPerPage: limite, totalItemsCount: total }}
+                        loading={loading}
+                        onCardReload={this.getPastaUnauthorized}
+                        onPageChange={(pg) => this.getPastaUnauthorized(pg)}>
                             <div>
                                 <Table responsive hover style={{marginBottom: 0}}>
                                     <tbody>

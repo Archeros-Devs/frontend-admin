@@ -15,28 +15,33 @@ class SamplePage extends Component {
     state = {
         pastas: [],
         loading: false,
+
+        currentPage: 1,
+        total: 1,
+        limite: 10,
     }
 
     componentDidMount() {
         this.pastas()
     }
 
-    pastas = () => {
-        api().get('/pastas')
+    pastas = (currentPage = 1) => {
+        this.setState({loading: true})
+        api().get(`/pastas?page=${currentPage}&limite=${this.state.limite}`)
             .then(res => {
-                console.log(res.data)
                 if (res.data.retorno) {
-                    this.setState({ pastas: res.data.pastas })
+                    this.setState({ pastas: res.data.pastas, total: res.data.total, loading: false }, this.forceUpdate())
                 } else {
 
                 }
             })
             .catch(error => {
-
+                console.error(error)
             })
     }
 
     render() {
+        const { total, limite, loading } = this.state
         return (
             <Aux>
                 <Row>
@@ -48,13 +53,14 @@ class SamplePage extends Component {
                             isOption
                             fullscreen
                             reload
-                            pagination={{ itemsCountPerPage: 5, totalItemsCount: 2 }}
-                            loading={this.state.loading}
+                            pagination={{ itemsCountPerPage: limite, totalItemsCount: total }}
+                            loading={loading}
                             cardHeaderRight={
                                 <a href='/admin/pastas/nova'>
                                     <i className="fa fa-plus f-20 m-r-15" />
                                 </a>
-                            }>
+                            }
+                            onPageChange={(pg) => this.pastas(pg)}>
                             <div>
                                 <Table responsive hover style={{ marginBottom: 0 }}>
                                     <tbody>

@@ -17,18 +17,23 @@ class SamplePage extends Component {
     state = {
         administradores: [],
         loading: false,
+        
+        currentPage: 1,
+        total: 1,
+        limite: 10,
     }
 
     componentDidMount() {
         this.administradores()
     }
 
-    administradores = () => {
-        api().get('/administradores')
+    administradores = (currentPage = 1) => {
+        this.setState({loading: true})
+        api().get(`/administradores?page=${currentPage}&limite=${this.state.limite}`)
             .then(res => {
                 console.log(res.data)
                 if (res.data.retorno) {
-                    this.setState({ administradores: res.data.administradores })
+                    this.setState({ administradores: res.data.administradores, total: res.data.total, loading: false }, this.forceUpdate())
                 } else {
 
                 }
@@ -39,7 +44,7 @@ class SamplePage extends Component {
     }
 
     render() {
-        const { loading, administradores } = this.state
+        const { total, limite, loading, administradores } = this.state
         return (
             <Aux>
                 <Row>
@@ -51,13 +56,14 @@ class SamplePage extends Component {
                             isOption
                             fullscreen
                             reload
-                            paginton={{ itemsCountPerPage: 5, totalItemsCount: 2 }}
-                            loading={this.state.loading}
+                            paginton={{ itemsCountPerPage: limite, totalItemsCount: total }}
+                            loading={loading}
                             cardHeaderRight={
                                 <a href='/admin/admin/novo'>
                                     <i className="fa fa-plus f-20 m-r-15" />
                                 </a>
-                            }>
+                            }
+                            onPageChange={(pg) => this.administradores(pg)}>
                             <div>
                                 <Table responsive hover style={{ marginBottom: 0 }}>
                                     <thead>
@@ -72,7 +78,7 @@ class SamplePage extends Component {
                                     <tbody>
                                         {
                                             administradores.map((adm, id) =>
-                                                <tr className="unread" key={adm.id_pasta}>
+                                                <tr className="unread" key={id}>
                                                     <td style={{display: 'flex', justifyContent: 'center'}}>
                                                         <div style={{width: 50}}>
                                                             <ModalImage

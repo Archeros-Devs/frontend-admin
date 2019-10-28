@@ -17,18 +17,23 @@ class SamplePage extends Component {
     state = {
         usuarios: [],
         loading: false,
+
+        currentPage: 1,
+        total: 1,
+        limite: 10,
     }
 
     componentDidMount() {
         this.usuarios()
     }
 
-    usuarios = () => {
-        api().get('/usuarios')
+    usuarios = (currentPage = 1) => {
+        this.setState({loading: true})
+        api().get(`/usuarios?page=${currentPage}&limite=${this.state.limite}`)
             .then(res => {
                 console.log(res.data)
                 if (res.data.retorno) {
-                    this.setState({ usuarios: res.data.usuarios })
+                    this.setState({ usuarios: res.data.usuarios, total: res.data.total, loading: false }, this.forceUpdate())
                 } else {
 
                 }
@@ -39,7 +44,7 @@ class SamplePage extends Component {
     }
 
     render() {
-        const { loading, usuarios } = this.state
+        const { total, limite, loading, usuarios } = this.state
         return (
             <Aux>
                 <Row>
@@ -51,13 +56,14 @@ class SamplePage extends Component {
                             isOption
                             fullscreen
                             reload
-                            pagination={{ itemsCountPerPage: 5, totalItemsCount: 2 }}
+                            pagination={{ itemsCountPerPage: limite, totalItemsCount: total }}
                             loading={loading}
                             cardHeaderRight={
                                 <a href='/usuarios/novo'>
                                     <i className="fa fa-plus f-20 m-r-15" />
                                 </a>
-                            }>
+                            }
+                            onPageChange={(pg) => this.usuarios(pg)}>
                             <div>
                                 <Table responsive hover style={{ marginBottom: 0 }}>
                                     <thead>
@@ -72,7 +78,7 @@ class SamplePage extends Component {
                                     <tbody>
                                         {
                                             usuarios.map((usuario, id) =>
-                                                <tr className="unread" key={usuario.id_pasta}>
+                                                <tr className="unread" key={id}>
                                                     <td style={{display: 'flex', justifyContent: 'center'}}>
                                                         <div style={{width: 50}}>
                                                             <ModalImage
