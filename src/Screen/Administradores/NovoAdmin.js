@@ -9,10 +9,18 @@ import Api from "../../api"
 class NovoAdmin extends React.Component {
     state = {
         loading: false,
+
+        nome: '',
         cpf: '',
+        sexo: 'M',
+        email: '',
+        profissao: '',
+        tipo: '1',
+
+        erros: [],
     }
 
-    handleChange(event) {
+    handleChangeCpf(event) {
         let cpf = event.target.value
 
         var numberPattern = /\d+/g;
@@ -21,9 +29,34 @@ class NovoAdmin extends React.Component {
         this.setState({ cpf: res.join('') });
     }
 
+    handleSubmit(e){
+        const { cpf, email, nome, profissao, sexo, tipo } = this.state
+        let erros = []
+
+        if(cpf.length !== 11)
+            erros.push('cpf') 
+        if(sexo !== 'M' && sexo !== 'F')
+            erros.push('sexo')
+        if(tipo !== '1' && tipo !== '2')
+            erros.push('tipo') 
+        
+        if(erros.length > 0)
+            return this.setState({erros})
+        
+        Api().post('/pastas', { cpf, email, nome, profissao, sexo, tipo })
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+        
+        e.preventDefault();
+    }
+
 
     render() {
-        const { loading, cpf } = this.state
+        const { loading, cpf, erros } = this.state
         return (
             <Aux>
                 <Row>
@@ -36,24 +69,24 @@ class NovoAdmin extends React.Component {
                             reload
                             loading={loading}
                             onCardReload={() => { console.log('Recarregar') }}>
-                            <div style={{ padding: 15 }}>
+                            <Form onSubmit={e => this.handleSubmit(e)} style={{ padding: 15 }} >
                                 <Row>
                                     <Col md={6}>
                                         <Form.Group controlId="novaPasta.nome">
                                             <Form.Label>Nome</Form.Label>
-                                            <Form.Control type="text" placeholder="Nome" />
+                                            <Form.Control type="text" onChange={e => this.setState({ nome: e.target.value })} placeholder="Nome" required isInvalid={erros.includes('nome')} />
                                         </Form.Group>
                                     </Col>
                                     <Col md={3}>
                                         <Form.Group controlId="novaPasta.cpf">
                                             <Form.Label>CPF</Form.Label>
-                                            <Form.Control type="text" maxlength="11" value={cpf} onChange={e => this.handleChange(e)} placeholder="00000000000 " />
+                                            <Form.Control type="text" maxlength="11" value={cpf} onChange={e => this.handleChangeCpf(e)} placeholder="00000000000" required isInvalid={erros.includes('cpf')}/>
                                         </Form.Group>
                                     </Col>
                                     <Col md={3}>
                                         <Form.Group controlId="novaPasta.sexo">
                                             <Form.Label>Sexo</Form.Label>
-                                            <Form.Control as="select" className="mb-3">
+                                            <Form.Control as="select" className="mb-3" onChange={e => this.setState({ sexo: e.target.value })} required isInvalid={erros.includes('sexo')}>
                                                 <option value="M">Masculino</option>
                                                 <option value="F">Feminino</option>
                                             </Form.Control>
@@ -64,19 +97,19 @@ class NovoAdmin extends React.Component {
                                     <Col md={6}>
                                         <Form.Group controlId="novaPasta.email">
                                             <Form.Label>Email</Form.Label>
-                                            <Form.Control type="email" placeholder="Email" />
+                                            <Form.Control type="text" placeholder="Email" onChange={e => this.setState({ email: e.target.value })} required isInvalid={erros.includes('email')} />
                                         </Form.Group>
                                     </Col>
                                     <Col md={3}>
                                         <Form.Group controlId="novaPasta.profissao">
                                             <Form.Label>Profissão</Form.Label>
-                                            <Form.Control type='text' placeholder="Profissão" />
+                                            <Form.Control type='text' placeholder="Profissão" onChange={e => this.setState({ profissao: e.target.value })} required isInvalid={erros.includes('profissao')} />
                                         </Form.Group>
                                     </Col>
                                     <Col md={3}>
                                         <Form.Group controlId="novaPasta.usuario">
-                                            <Form.Label>Usuario</Form.Label>
-                                            <Form.Control as="select" className="mb-3">
+                                            <Form.Label>Tipo</Form.Label>
+                                            <Form.Control as="select" className="mb-3"  onChange={e => this.setState({ tipo: e.target.value })} required isInvalid={erros.includes('tipo')}>
                                                 <option value='1'>Administrador</option>
                                                 <option value='2'>Super Administrador</option>
                                             </Form.Control>
@@ -88,7 +121,7 @@ class NovoAdmin extends React.Component {
                                         Salvar
                                     </Button>
                                 </Row>
-                            </div>
+                            </Form>
                         </Card>
                     </Col>
                 </Row>
