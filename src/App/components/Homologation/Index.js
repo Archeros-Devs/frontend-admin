@@ -100,8 +100,8 @@ class TableHomologation extends Component {
                                                     </h6>
                                                 </td>
                                                 <td>
-                                                    <button onClick={() => this.avaliar(pasta.id_pasta, +1)} style={{...pasta.avaliacao === -1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-success text-white`}>Aprovar</button>
-                                                    <button onClick={() => this.avaliar(pasta.id_pasta, -1)} style={{...pasta.avaliacao === 1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-danger text-white`}>Reprovar</button>
+                                                    <button onClick={() => this.avaliar(pasta.id_pasta, +1)} style={{...pasta.avaliacao === -1 || pasta.avaliacao === null ? {background: 'white'} : {}}} className={`btn-peruibe btn btn-secondary btn-success text-black `}>Aprovar</button>
+                                                    <button onClick={() => this.avaliar(pasta.id_pasta, -1)} style={{...pasta.avaliacao === 1 || pasta.avaliacao === null ? {background: 'white'} : {}}} className={`btn-peruibe btn btn-secondary btn-danger text-black `}>Reprovar</button>
                                                 </td>
                                             </tr>
                                         )
