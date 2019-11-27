@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actionTypes from "../../../store/actions";
+import {NavLink} from 'react-router-dom';
 
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login'
@@ -111,6 +112,7 @@ class SignUp extends React.Component {
                                     </Button>
 
                                 </div>
+
                                 {/**<div className="input-group mb-4" style={{WebkitJustifyContent: 'space-between'}}>
                                     <FacebookLogin
                                         appId="415441372420544"
@@ -133,7 +135,7 @@ class SignUp extends React.Component {
                                     />
                                 </div>**/}
                                 {/*<p className="mb-2 text-muted">Esqueceu a senha? <NavLink to="/auth/reset-password-1">Recuperar</NavLink></p>*/}
-                                {/*<p className="mb-0 text-muted">Não tem uma conta? <NavLink to="/auth/signup">Inscrever-se</NavLink></p>*/}
+                                <p className="mb-0 text-muted">Não tem uma conta? <NavLink to="/auth/signup">Inscrever-se</NavLink></p>
                             </div>
                         </div>
                     </div>
