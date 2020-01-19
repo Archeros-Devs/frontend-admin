@@ -121,7 +121,7 @@ class Dashboard extends React.Component {
                                             <h5 className="m-0">Administradores</h5>
                                         </div>
                                         <div className="col-auto">
-                                            <label className="label theme-bg2 text-white f-14 f-w-400 float-right">{(admins / usuarios) * 100}%</label>
+                                            <label className="label theme-bg2 text-white f-14 f-w-400 float-right">{((admins / usuarios) * 100).toFixed(2)}%</label>
                                         </div>
                                     </div>
                                     <h2 className="mt-2 f-w-300">{admins}<sub className="text-muted f-14">Admins</sub></h2>
