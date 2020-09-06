@@ -22,8 +22,8 @@ class Dashboard extends React.Component {
     }
 
     componentDidMount() {
-        this.dadosDashboard()
-        this.rankFolders()
+        //this.dadosDashboard()
+        //this.rankFolders()
     }
 
     dadosDashboard = async () => {

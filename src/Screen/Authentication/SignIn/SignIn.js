@@ -42,11 +42,11 @@ class SignUp extends React.Component {
         this.setState({ loading: true })
 
         try {
-            const res = await api().post('signin', {
+            const res = await api().post('login', {
                 email: this.state.email,
-                password: this.state.senha
+                senha: this.state.senha
             })
-            if (res.data.retorno) {
+            if (res.status === 200) {
                 this.props.onSingin(res.data.name, res.data.email, res.data.img, res.data.token)
                 this.props.history.push('/dashboard')
             } else {

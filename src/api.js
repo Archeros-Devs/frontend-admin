@@ -7,7 +7,7 @@ const api = () => {
     return axios.create({
         headers: { 'Authorization': `Bearer ${token}` },
         baseURL: document.location.hostname === 'localhost'
-            ? 'http://localhost:21086/'
+            ? 'http://localhost:8081/'
             : 'http://peruibemelhor.nodejs7605.kinghost.net:21086/',
     })
 };
