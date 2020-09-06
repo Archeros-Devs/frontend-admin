@@ -49,7 +49,7 @@ class SignUp extends React.Component {
             if (res.status === 200) {
                 this.props.onSingin(res.data.name, res.data.email, res.data.img, res.data.token)
                 this.props.history.push('/dashboard')
-            } else {
+            } else { 
                 console.log(res.data.msg)
             }
         } catch (err) {
