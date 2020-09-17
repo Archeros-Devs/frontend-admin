@@ -2,6 +2,8 @@ import React from 'react';
 import DEMO  from './../../../../../store/constant';
 import Aux from "../../../../../hoc/_Aux";
 
+import Logo from "../../../../../assets/images/logo-icon.png"
+
 const navLogo = (props) => {
     let toggleClass = ['mobile-menu'];
     if (props.collapseMenu) {
@@ -13,7 +15,7 @@ const navLogo = (props) => {
             <div className="navbar-brand header-logo">
                  <a href={'/admin/dashboard'} className="b-brand">
                     <div className="b-bg">
-                        <i className="feather icon-globe" />
+                        <img src={Logo}/>
                     </div>
                     <span className="b-title">Peruíbe Melhor</span>
                  </a>

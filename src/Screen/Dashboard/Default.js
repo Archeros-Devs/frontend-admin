@@ -126,11 +126,13 @@ class Dashboard extends React.Component {
                                     </div>
                                     <h2 className="mt-2 f-w-300">{admins}<sub className="text-muted f-14"></sub></h2>
                                     <h6 className="text-muted mt-3 mb-0">Adicionar Administrador</h6>
-                                    <i className="feather icon-users f-30 text-c-green" />
+                                    <div>
+                                        <i className="feather icon-user f-40 text-c-blue" />
+                                    </div>
                                 </Card.Body>
                             </Card>
                         </a>
-                    </Col>
+                    </Col>  
                     <Col md={6} xl={4}>
                         <a href='/admin/pastas/homologar'>
                             <Card className='card-social'>
@@ -172,7 +174,7 @@ class Dashboard extends React.Component {
                                 <Card.Body className='border-bottom'>
                                     <div className="row d-flex align-items-center">
                                         <div className="col-auto">
-                                            <i className="feather icon-users f-30 text-c-green" />
+                                            <i className="feather icon-users f-30 text-c-blue" />
                                         </div>
                                         <div className="col">
                                             <h3 className="f-w-300">{usuarios}</h3>

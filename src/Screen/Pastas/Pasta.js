@@ -89,8 +89,8 @@ class SamplePage extends Component {
                     onCardReload={() => {}}
                     cardHeaderRight={
                         <div>
-                            <button onClick={() => this.avaliar(pasta.id_pasta, +1)} style={{...pasta.avaliacao === -1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-success text-white`}>Aprovar</button>
-                            <button onClick={() => this.avaliar(pasta.id_pasta, -1)} style={{...pasta.avaliacao === 1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-danger text-white`}>Reprovar</button>
+                            <button onClick={() => this.avaliar(pasta.id_pasta, +1)} style={{...pasta.avaliacao === 1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-success text-white`}>Aprovar</button>
+                            <button onClick={() => this.avaliar(pasta.id_pasta, -1)} style={{...pasta.avaliacao === -1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-danger text-white`}>Reprovar</button>
                         </div>
                     }>
                     <div className='my-container'>
@@ -108,6 +108,7 @@ class SamplePage extends Component {
                             <div className='col-right'>
                                 <div className='my-card card-user'>
                                     <div style={{display: 'flex', alignItems: 'center'}}>
+                                        {console.log(pasta)}
                                         <ModalImage
                                             images={[pasta.usuario.url_img || profile_image]}
                                             displayIndex={0}

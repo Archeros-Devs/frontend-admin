@@ -27,7 +27,7 @@ class SamplePage extends Component {
 
     pastas = (currentPage = 1) => {
         this.setState({loading: true})
-        api().get(`/pastas?page=${currentPage}&limit=${this.state.limite}`)
+        api().get(`/pastas?page=${currentPage}&limit=${this.state.limite}&homologada=1`)
             .then(({data, status}) => {
                 console.log(data, status)
                 if (status === 200) {
