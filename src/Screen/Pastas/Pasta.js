@@ -43,12 +43,12 @@ class SamplePage extends Component {
         **/
         let id_pasta = this.state.id_pasta
         api().get(`/pastas/${id_pasta}`)
-        .then(res => {
-            if(res.data.retorno){
-                console.info(res.data)
-                this.setState({pasta: res.data.pasta, imgs: res.data.imgs})
+        .then(({data, status}) => {
+            if(status === 200){
+                console.info(data)
+                this.setState({pasta: data.pasta, imgs: data.imgs})
             }else{
-                console.info(res.data.msg)
+                console.info(data.msg)
             }
             this.setState({loading: false})
         })
@@ -109,17 +109,17 @@ class SamplePage extends Component {
                                 <div className='my-card card-user'>
                                     <div style={{display: 'flex', alignItems: 'center'}}>
                                         <ModalImage
-                                            images={[pasta.user_img || profile_image]}
+                                            images={[pasta.usuario.url_img || profile_image]}
                                             displayIndex={0}
                                             alt='Imagem do Usuário'
                                         />
                                     </div>
                                     <div className='info'>
                                         <span style={{fontSize: 12, fontWeight: 'bold'}}>Criador:</span>
-                                        <span style={{fontSize: 12, fontWeight: 'bold'}}>{pasta.user_nome}</span>
-                                        <span>{pasta.email}</span>
+                                        <span style={{fontSize: 12, fontWeight: 'bold'}}>{pasta.usuario.nome}</span>
+                                        <span>{pasta.usuario.email}</span>
                                         <span>{pasta.escolaridade}</span>
-                                        <span style={{fontSize: 12, fontStyle: 'italic'}}>Criado em: {moment(pasta.data_criacao).format('DD/MM/YYYY')}</span>
+                                        <span style={{fontSize: 12, fontStyle: 'italic'}}>Criado em: {moment(pasta.usuario.criado_em).format('DD/MM/YYYY')}</span>
                                     </div>
                                 </div>
 

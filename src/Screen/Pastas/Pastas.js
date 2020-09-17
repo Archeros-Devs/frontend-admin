@@ -27,10 +27,11 @@ class SamplePage extends Component {
 
     pastas = (currentPage = 1) => {
         this.setState({loading: true})
-        api().get(`/pastas?page=${currentPage}&limite=${this.state.limite}`)
-            .then(res => {
-                if (res.data.retorno) {
-                    this.setState({ pastas: res.data.pastas, total: res.data.total, loading: false }, this.forceUpdate())
+        api().get(`/pastas?page=${currentPage}&limit=${this.state.limite}`)
+            .then(({data, status}) => {
+                console.log(data, status)
+                if (status === 200) {
+                    this.setState({ pastas: data.pastas, total: data.total, loading: false }, this.forceUpdate())
                 } else {
 
                 }
@@ -75,8 +76,8 @@ class SamplePage extends Component {
                                                     </td>
                                                     <td>
                                                         <h6 className="text-muted">
-                                                            <i className="fa fa-circle f-10 m-r-15" style={{ color: !!pasta.homologada ? '#1ede1e' : 'yellow' }} />
-                                                            {moment(pasta.data_criacao).format('DD/MM/Y')}
+                                                            <i className="fa fa-circle f-10 m-r-15" style={{ color: pasta.homologada_em !== null ? '#1ede1e' : 'yellow' }} />
+                                                            {moment(pasta.criado_em).format('DD/MM/Y')}
                                                         </h6>
                                                     </td>
                                                     <td>

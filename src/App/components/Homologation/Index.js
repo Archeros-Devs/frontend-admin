@@ -30,12 +30,12 @@ class TableHomologation extends Component {
     getPastaUnauthorized = async (currentPage = 1) => {
         this.setState({loading: true})
         try {
-            const res = await api().get(`pastas/homologar?page=${currentPage}&limite=${this.state.limite}`)
-            if(res.data.retorno){
-                this.setState({ pasta_homologar: res.data.pastas, total: res.data.total, loading: false }, this.forceUpdate())
-                console.log(res.data.pastas)
+            const {data, status} = await api().get(`pastas?page=${currentPage}&limit=${this.state.limite}&homologada=0`)
+            if(status === 200){
+                this.setState({ pasta_homologar: data.pastas, total: data.total, loading: false }, this.forceUpdate())
+                console.log(data.pastas)
             }else{
-                console.log(res.data.msg)
+                console.log(data.msg)
             }
         } catch (error) {
             console.error(error)
@@ -45,11 +45,11 @@ class TableHomologation extends Component {
     avaliar = async (id_pasta, avaliacao) => {
         console.log(this.state.pasta_homologar)
         try {
-            const res = await api().put(`/pastas/${id_pasta}/avaliar`, {
+            const {data, status} = await api().put(`/pastas/${id_pasta}/avaliar`, {
                 avaliacao
             })
 
-            if(res.data.retorno){
+            if(status === 200){
                 let pastas = this.state.pasta_homologar
                 pastas = pastas.map(p => {
                     if (p.id_pasta === id_pasta) return {...p, avaliacao}
@@ -57,7 +57,7 @@ class TableHomologation extends Component {
                 })
                 this.setState({pasta_homologar: pastas})
             }else{
-                console.log(res.data.msg)
+                console.log(data.msg)
             }
         } catch (error) {
             console.error(error)
@@ -96,7 +96,7 @@ class TableHomologation extends Component {
                                                 <td>
                                                     <h6 className="text-muted">
                                                         <i className="fa fa-circle text-c-yellow f-10 m-r-15"/>
-                                                        {moment(pasta.data_criacao).format('DD/MM/Y')}
+                                                        {moment(pasta.criado_em).format('DD/MM/Y')}
                                                     </h6>
                                                 </td>
                                                 <td>

@@ -10,6 +10,7 @@ import DEMO from "../../../../../store/constant";
 import Avatar1 from '../../../../../assets/images/user/avatar-1.jpg';
 import Avatar2 from '../../../../../assets/images/user/avatar-2.jpg';
 import Avatar3 from '../../../../../assets/images/user/avatar-3.jpg';
+import Avatar4 from '../../../../../assets/images/user/avatar-4.jpg'
 
 class NavRight extends Component {
     state = {
@@ -88,7 +89,7 @@ class NavRight extends Component {
                             </Dropdown.Toggle>
                             <Dropdown.Menu alignRight className="profile-notification">
                                 <div className="pro-head">
-                                    <img src={Avatar2} className="img-radius" alt="User Profile" style={{border: '1px double white'}}/>
+                                    <img src={Avatar4} className="img-radius" alt="User Profile" style={{border: '1px double white'}}/>
                                     <span style={{color: '#fff'}}>{this.props.user_name}</span>
                                     <a href={DEMO.BLANK_LINK} className="dud-logout" style={{color: '#fff'}} title="Sair">
                                         <i className="feather icon-log-out"/>

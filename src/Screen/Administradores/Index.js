@@ -29,11 +29,11 @@ class SamplePage extends Component {
 
     administradores = (currentPage = 1) => {
         this.setState({loading: true})
-        api().get(`/administradores?page=${currentPage}&limite=${this.state.limite}`)
-            .then(res => {
-                console.log(res.data)
-                if (res.data.retorno) {
-                    this.setState({ administradores: res.data.administradores, total: res.data.total, loading: false }, this.forceUpdate())
+        api().get(`/administradores?page=${currentPage}&limit=${this.state.limite}`)
+            .then(({data, status}) => {
+                console.log(data)
+                if (status === 200) {
+                    this.setState({ administradores: data.administradores, total: data.total, loading: false }, this.forceUpdate())
                 } else {
 
                 }

@@ -124,9 +124,9 @@ class Dashboard extends React.Component {
                                             <label className="label theme-bg2 text-white f-14 f-w-400 float-right">{((admins / usuarios) * 100).toFixed(2)}%</label>
                                         </div>
                                     </div>
-                                    <h2 className="mt-2 f-w-300">{admins}<sub className="text-muted f-14">Admins</sub></h2>
+                                    <h2 className="mt-2 f-w-300">{admins}<sub className="text-muted f-14"></sub></h2>
                                     <h6 className="text-muted mt-3 mb-0">Adicionar Administrador</h6>
-                                    <i className="fa fa-user text-c-purple f-50" />
+                                    <i className="feather icon-users f-30 text-c-green" />
                                 </Card.Body>
                             </Card>
                         </a>
@@ -137,7 +137,7 @@ class Dashboard extends React.Component {
                                 <Card.Body className='border-bottom'>
                                     <div className="row align-items-center justify-content-center">
                                         <div className="col-auto">
-                                            <i className="fa fa-folder text-primary f-36" />
+                                            <i className="feather icon-folder f-30 text-c-blue" />
                                         </div>
                                         <div className="col text-right">
                                             <h3><span className="text-muted">Pastas: {pastas}</span></h3>
