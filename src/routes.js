@@ -17,6 +17,7 @@ const Admin = React.lazy(() => import('./Screen/Administradores/Index' ));
 
 const Perfil = React.lazy(() => import('./Screen/Perfil/Index'));
 const Users = React.lazy(() => import('./Screen/Users/Index'));
+const PerfilUsuario = React.lazy(() => import('./Screen/Users/Perfil' ));
 
 
 
@@ -53,6 +54,7 @@ const routes = [
     { path: '/admin' , exact: true, name: 'Admin', component: Admin },
     { path: '/perfil' , exact: true, name: 'Perfil', component: Perfil },
     { path: '/usuarios' , exact: true, name: 'Users', component: Users },
+    { path: '/usuarios/:id_usuario' , exact: true, name: 'Usuarios', component: PerfilUsuario },
 
      
     { path: '/basic/button', exact: true, name: 'Basic Button', component: UIBasicButton },

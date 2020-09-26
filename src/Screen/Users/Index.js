@@ -30,10 +30,10 @@ class SamplePage extends Component {
     usuarios = (currentPage = 1) => {
         this.setState({loading: true})
         api().get(`/usuarios?page=${currentPage}&limite=${this.state.limite}`)
-            .then(res => {
-                console.log(res.data)
-                if (res.data.retorno) {
-                    this.setState({ usuarios: res.data.usuarios, total: res.data.total, loading: false }, this.forceUpdate())
+            .then(({data, status}) => {
+                console.log(data)
+                if (status === 200) {
+                    this.setState({ usuarios: data.usuarios, total: data.total, loading: false }, this.forceUpdate())
                 } else {
 
                 }
@@ -82,7 +82,7 @@ class SamplePage extends Component {
                                                     <td style={{display: 'flex', justifyContent: 'center'}}>
                                                         <div style={{width: 50}}>
                                                             <ModalImage
-                                                                images={[usuario.img || (usuario.sexo === 'M' ? male : female)]}
+                                                                images={[usuario.img || (usuario.genero === 'masculino' ? male : female)]}
                                                                 displayIndex={0}
                                                                 alt='Imagem do Usuário'
                                                                 imgStyle={{width: 50}}
@@ -92,22 +92,22 @@ class SamplePage extends Component {
                                                     </td>
                                                     <td style={{ textAlign: 'left' }}>
                                                         <h6 className="mb-1">
-                                                            <a href={`/usuarios/${usuario.id_pasta}`} className="f-12">{usuario.nome + '  '}
+                                                            <a href={`/usuarios/${usuario.id_usuario}`} className="f-12">{usuario.nome + '  '}
                                                                 {usuario.tipo_usuario > 0 &&
                                                                 <Badge variant="secondary">{usuario.tipo_usuario === 1 ? 'Admin' : 'Super Admin'}</Badge>}
                                                             </a>
                                                         </h6>
-                                                        <p className="m-0">{usuario.email}</p>
+                                                        <p className="m-0">{usuario.email || "Informação não preenchida"}</p>
                                                     </td>
                                                     <td style={{ textAlign: 'left' }}>
-                                                        <p className="m-0">{usuario.escolaridade}</p>
+                                                        <p className="m-0">{usuario.escolaridade.escolaridade || ""}</p>
                                                     </td>
                                                     <td>
-                                                        <p className="m-0">{usuario.id_profissao}</p>
+                                                        <p className="m-0">{usuario.profissao.nome || ""}</p>
                                                     </td>
                                                     <td>
                                                         <h6 className="text-muted">
-                                                            <i className="fa fa-circle f-10 m-r-15" style={{ color: !!usuario.ativo ? '#1ede1e' : 'cray' }} />
+                                                            <i className="fa fa-circle f-10 m-r-15" style={{ color: !usuario.deletado_em ? '#1ede1e' : 'cray' }} />
                                                         </h6>
                                                     </td>
                                                 </tr>

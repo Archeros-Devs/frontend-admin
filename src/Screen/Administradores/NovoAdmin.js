@@ -12,7 +12,7 @@ class NovoAdmin extends React.Component {
 
         nome: '',
         cpf: '',
-        sexo: 'M',
+        genero: 'M',
         email: '',
         profissao: '',
         tipo: '1',
@@ -30,20 +30,20 @@ class NovoAdmin extends React.Component {
     }
 
     handleSubmit(e){
-        const { cpf, email, nome, profissao, sexo, tipo } = this.state
+        const { cpf, email, nome, profissao, genero, tipo } = this.state
         let erros = []
 
         if(cpf.length !== 11)
             erros.push('cpf') 
-        if(sexo !== 'M' && sexo !== 'F')
-            erros.push('sexo')
+        if(genero !== 'M' && genero !== 'F')
+            erros.push('genero')
         if(tipo !== '1' && tipo !== '2')
             erros.push('tipo') 
         
         if(erros.length > 0)
             return this.setState({erros})
         
-        Api().post('/pastas', { cpf, email, nome, profissao, sexo, tipo })
+        Api().post('/pastas', { cpf, email, nome, profissao, genero, tipo })
         .then(res => {
             console.log(res.data)
         })
@@ -84,9 +84,9 @@ class NovoAdmin extends React.Component {
                                         </Form.Group>
                                     </Col>
                                     <Col md={3}>
-                                        <Form.Group controlId="novaPasta.sexo">
-                                            <Form.Label>Sexo</Form.Label>
-                                            <Form.Control as="select" className="mb-3" onChange={e => this.setState({ sexo: e.target.value })} required isInvalid={erros.includes('sexo')}>
+                                        <Form.Group controlId="novaPasta.genero">
+                                            <Form.Label>Gênero</Form.Label>
+                                            <Form.Control as="select" className="mb-3" onChange={e => this.setState({ genero: e.target.value })} required isInvalid={erros.includes('genero')}>
                                                 <option value="M">Masculino</option>
                                                 <option value="F">Feminino</option>
                                             </Form.Control>

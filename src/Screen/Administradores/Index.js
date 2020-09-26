@@ -82,7 +82,7 @@ class SamplePage extends Component {
                                                     <td style={{display: 'flex', justifyContent: 'center'}}>
                                                         <div style={{width: 50}}>
                                                             <ModalImage
-                                                                images={[adm.img || (adm.sexo === 'M' ? male : female)]}
+                                                                images={[adm.img || (adm.genero === 'masculino' ? male : female)]}
                                                                 displayIndex={0}
                                                                 alt='Imagem do Adiministrador'
                                                                 imgStyle={{width: 50}}
@@ -92,7 +92,7 @@ class SamplePage extends Component {
                                                     </td>
                                                     <td style={{ textAlign: 'left' }}>
                                                         <h6 className="mb-1">
-                                                            <a href={`/administradores/${adm.id_pasta}`} className="f-12">{adm.nome + '  '}
+                                                            <a href={`/usuarios/${adm.id_usuario}`} className="f-12">{adm.nome + '  '}
                                                                 {adm.tipo_usuario > 0 &&
                                                                 <Badge variant="secondary">{adm.tipo_usuario === 1 ? 'Admin' : 'Super Admin'}</Badge>}
                                                             </a>
@@ -100,14 +100,14 @@ class SamplePage extends Component {
                                                         <p className="m-0">{adm.email}</p>
                                                     </td>
                                                     <td style={{ textAlign: 'left' }}>
-                                                        <p className="m-0">{adm.escolaridade}</p>
+                                                        <p className="m-0">{adm.escolaridade.escolaridade || "Informação não preenchida"}</p>
                                                     </td>
                                                     <td>
-                                                        <p className="m-0">{adm.profissao}</p>
+                                                        <p className="m-0">{adm.profissao.nome || "Informação não preenchida"}</p>
                                                     </td>
                                                     <td>
                                                         <h6 className="text-muted">
-                                                            <i className="fa fa-circle f-10 m-r-15" style={{ color: !!adm.ativo ? '#1ede1e' : 'cray' }} />
+                                                            <i className="fa fa-circle f-10 m-r-15" style={{ color: !adm.deletado_em ? '#1ede1e' : 'cray' }} />
                                                         </h6>
                                                     </td>
                                                 </tr>

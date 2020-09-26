@@ -89,8 +89,8 @@ class SamplePage extends Component {
                     onCardReload={() => {}}
                     cardHeaderRight={
                         <div>
-                            <button onClick={() => this.avaliar(pasta.id_pasta, +1)} style={{...pasta.avaliacao === 1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-success text-white`}>Aprovar</button>
-                            <button onClick={() => this.avaliar(pasta.id_pasta, -1)} style={{...pasta.avaliacao === -1 || pasta.avaliacao === null ? {background: 'gray'} : {}}} className={`btn-peruibe btn btn-secondary btn-danger text-white`}>Reprovar</button>
+                            <button onClick={() => this.avaliar(pasta.id_pasta, +1)} style={{...pasta.avaliacao === 1 || pasta.avaliacao === null ? {background: '#28a745', color:'white', borderColor:'#28a745'} : {}}} className={`btn-peruibe btn`}>Aprovar</button>
+                            <button onClick={() => this.avaliar(pasta.id_pasta, -1)} style={{...pasta.avaliacao === -1 || pasta.avaliacao === null ? {background: '#dc3545', color:'white', borderColor:'#dc3545'} : {}}} className={`btn-peruibe_r btn`}>Reprovar</button>
                         </div>
                     }>
                     <div className='my-container'>
