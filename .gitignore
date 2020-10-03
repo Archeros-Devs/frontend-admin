@@ -10,7 +10,7 @@
 /coverage
 
 # production
-# /build
+/build
 
 # misc
 .DS_Store
@@ -24,3 +24,8 @@ yarn-debug.log*
 yarn-error.log*
 
 api.js
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
