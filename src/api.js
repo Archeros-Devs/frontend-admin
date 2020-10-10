@@ -7,8 +7,8 @@ const api = () => {
     return axios.create({
         headers: { 'Authorization': `Bearer ${token}` },
         baseURL: document.location.hostname === 'localhost'
-            ? 'http://localhost:8081/'
-            : 'http://peruibemelhor.nodejs7605.kinghost.net:21086/',
+        ? 'http://backend-peruibe-melhor.us-east-1.elasticbeanstalk.com/escolaridades'
+        : 'http://peruibemelhor.nodejs7605.kinghost.net:21086/',
     })
 };
 

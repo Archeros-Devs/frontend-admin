@@ -19,7 +19,14 @@ class NovaPasta extends React.Component {
         loading: false,
         selectedFile: [],
         categorias: [],
-        LatLng: {}
+        erros:[],
+        LatLng: {},
+        nome:"",
+        discussao:"",
+        categoria:1,
+        descricao:"",
+        localizacao:""
+        
     }
 
     componentDidMount() {
@@ -43,8 +50,20 @@ class NovaPasta extends React.Component {
         })
     }
 
+    handleSubmit = () => {
+        const {nome, discussao, categoria, fotos, descricao, localizacao} = this.state
+        console.log(this.state)
+        Api().post('/pastas',{nome, discussao, categorias:[categoria], descricao, localizacao})
+        .then(({data}) => {
+            console.log(data)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+    }
+
     render() {
-        const { loading, selectedFile, categorias, LatLng } = this.state
+        const { loading, selectedFile, categorias, LatLng, erros } = this.state
         return (
             <Aux>
                 <Row>
@@ -63,22 +82,23 @@ class NovaPasta extends React.Component {
                                     <Col md={6}>
                                         <Form.Group controlId="novaPasta.nome">
                                             <Form.Label>Nome da Pasta</Form.Label>
-                                            <Form.Control type="text" placeholder="Nome" />
+                                            <Form.Control type="text" onChange={e => this.setState({ nome: e.target.value })} placeholder="Nome" required isInvalid={erros.includes('nome')}/>
                                         </Form.Group>
                                         <Form.Group controlId="novaPasta.discussao">
                                             <Form.Label>Discussão</Form.Label>
-                                            <Form.Control type="text" placeholder="Discussão" />
+                                            <Form.Control type="text"onChange={e => this.setState({ discussao: e.target.value })} placeholder="Discussão" required isInvalid={erros.includes('discussao')}/>
                                         </Form.Group>
                                     </Col>
                                     <Col md={6}>
                                         <Form.Group controlId="novaPasta.categoria">
                                             <Form.Label>Categoria</Form.Label>
-                                            <Form.Control as="select">
+                                            <Form.Control as="select" onChange={e => this.setState({ categoria: e.target.value })} required isInvalid={erros.includes('categoria')}>
                                                 {
                                                     categorias.map((cat, index) => <option key={index} value={`${cat.id_categoria}`}>{cat.categoria}</option>)
                                                 }
                                             </Form.Control>
                                         </Form.Group>
+{/*                                        
                                         <Form.Group controlId="novaPasta.fotos">
                                             <Form.Label>Fotos</Form.Label>
                                             <div>
@@ -102,35 +122,38 @@ class NovaPasta extends React.Component {
                                             </div>
 
                                         </Form.Group>
+*/}
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col md={12}>
                                         <Form.Group controlId="exampleForm.descricao">
                                             <Form.Label>Descrição</Form.Label>
-                                            <Form.Control as="textarea" rows="3" />
+                                            <Form.Control as="textarea" rows="3"onChange={e => this.setState({ descricao: e.target.value })} placeholder="Descrição" required isInvalid={erros.includes('descricao')} />
                                         </Form.Group>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col md={6}>
-                                        <Form.Group controlId="exampleForm.endereco">
-                                            <Form.Label>Endereço</Form.Label>
+                                        <Form.Group controlId="exampleForm.localizacao">
+                                            <Form.Label>Localizacao</Form.Label>
                                             <Autocomplete
                                                 className='form-control'
                                                 style={{ width: '100%' }}
                                                 placeholder=''
                                                 onPlaceSelected={(place) => {
                                                     console.log(place);
+                                                    this.setState({ localizacao: place })
                                                 }}
                                                 types={['address']}
                                                 componentRestrictions={{ country: "br" }}
+
                                             />
                                         </Form.Group>
                                     </Col>
                                     <Col md={6} style={{ display: 'flex', justifyContent: 'flex-end', alignItems:'flex-end' }}>
                                         <Form.Group controlId="exampleForm.submit">
-                                        <Button variant="primary" type="submit" style={{margin:0}}>
+                                        <Button variant="primary" onClick={this.handleSubmit} style={{margin:0}}>
                                             Salvar
                                         </Button>
                                         </Form.Group>

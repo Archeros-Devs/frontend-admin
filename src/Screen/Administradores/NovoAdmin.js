@@ -43,7 +43,7 @@ class NovoAdmin extends React.Component {
         if(erros.length > 0)
             return this.setState({erros})
         
-        Api().post('/pastas', { cpf, email, nome, profissao, genero, tipo })
+        Api().post('/usuarios', { cpf, email, nome, profissao, genero, tipo })
         .then(res => {
             console.log(res.data)
         })
