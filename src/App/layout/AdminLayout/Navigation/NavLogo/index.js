@@ -13,9 +13,9 @@ const navLogo = (props) => {
     return (
         <Aux>
             <div className="navbar-brand header-logo">
-                 <a href={'/admin/dashboard'} className="b-brand">
+                 <a href={'/dashboard'} className="b-brand">
                     <div className="b-bg">
-                        <img src={Logo}/>
+                        <img src={Logo} alt='Logo'/>
                     </div>
                     <span className="b-title">Peruíbe Melhor</span>
                  </a>

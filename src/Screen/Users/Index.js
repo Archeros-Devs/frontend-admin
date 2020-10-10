@@ -59,7 +59,7 @@ class SamplePage extends Component {
                             pagination={{ itemsCountPerPage: limite, totalItemsCount: total }}
                             loading={loading}
                             cardHeaderRight={
-                                <a href='/admin/admin/novo'>
+                                <a href='/admin/novo'>
                                     <i className="fa fa-plus f-20 m-r-15" />
                                 </a>
                             }

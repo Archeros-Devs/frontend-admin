@@ -97,9 +97,9 @@ class NavRight extends Component {
                                 </div>
                                 <ul className="pro-body">
                                     {/**<li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-settings"/> Configurações</a></li>**/}
-                                    <li><a href={'/admin/perfil'} className="dropdown-item"><i className="feather icon-user"/> Perfil</a></li>
+                                    <li><a href={'/perfil'} className="dropdown-item"><i className="feather icon-user"/> Perfil</a></li>
                                     {/**<li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-mail"/> My Messages</a></li>**/}
-                                    <li><a href={'/admin/singin'} className="dropdown-item"><i className="feather icon-lock"/> Sair</a></li>
+                                    <li><a href={'/singin'} className="dropdown-item"><i className="feather icon-lock"/> Sair</a></li>
                                 </ul>
                             </Dropdown.Menu>
                         </Dropdown>

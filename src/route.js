@@ -5,7 +5,7 @@ const Signin = React.lazy(() => import('./Screen/Authentication/SignIn/SignIn'))
 
 const route = [
     { path: '/auth/signup', exact: true, name: 'Signup', component: SignUp, public: true },
-    { path: '/auth/signin', exact: true, name: 'Signin', component: Signin, public: true }
+    { path: '/login', exact: true, name: 'Signin', component: Signin, public: true }
 ];
 
 export default route;

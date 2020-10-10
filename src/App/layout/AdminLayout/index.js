@@ -56,7 +56,7 @@ class AdminLayout extends Component {
                     name={route.name}
                     render={props => {
                         if (!store.getState().auth.token) {
-                            return <Redirect to="/auth/signin" />
+                            return <Redirect to="/login" />
                         } else {
                             return <route.component {...props} />
                         }

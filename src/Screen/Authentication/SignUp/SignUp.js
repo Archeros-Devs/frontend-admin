@@ -41,7 +41,7 @@ class SignUp1 extends React.Component {
                                     </div>
                                 </div>
                                 <button className="btn btn-outline">Inscrever-se</button>
-                                <p className="mb-0 text-muted">Já tem uma conta? <NavLink to="/auth/signin">Login</NavLink></p>
+                                <p className="mb-0 text-muted">Já tem uma conta? <NavLink to="/login">Login</NavLink></p>
                             </div>
                         </div>
                     </div>
