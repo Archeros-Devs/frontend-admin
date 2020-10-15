@@ -1,0 +1,23 @@
+.card-user {
+  display: flex;
+  height: fit-content;
+
+  .img {
+    width: inherit;
+    border-radius: 50% !important;
+    max-width: 100px;
+    min-height: 100px;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.table td {
+  text-align: center;
+}
+
