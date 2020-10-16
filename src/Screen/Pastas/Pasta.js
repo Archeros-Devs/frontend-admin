@@ -101,7 +101,10 @@ class SamplePage extends Component {
                     </div>
                     <div className='info'>
                       <span style={{ fontSize: 12, fontWeight: 'bold' }}>Criador:</span>
-                      <span style={{ fontSize: 12, fontWeight: 'bold' }}>{pasta.usuario.nome}</span>
+                      <a href={`/usuarios/${pasta.usuario.id_usuario}`} className="f-12">{pasta.usuario.nome + '  '}
+                        {pasta.usuario.tipo_usuario > 0 &&
+                          <Badge variant="secondary">{pasta.usuario.tipo_usuario === 1 ? 'Admin' : 'Super Admin'}</Badge>}
+                      </a>
                       <span>{pasta.usuario.email}</span>
                       <span>{pasta.escolaridade}</span>
                       <span style={{ fontSize: 12, fontStyle: 'italic' }}>Criado em: {moment(pasta.usuario.criado_em).format('DD/MM/YYYY')}</span>

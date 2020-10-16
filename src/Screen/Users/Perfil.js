@@ -45,7 +45,7 @@ class SamplePage extends Component {
           <Col>
             <Card title='Perfil' isOption>
               <div className='my-card card-user'>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div className="container-img">
                   <ModalImage
                     images={[usuario.url_img || profile_image]}
                     displayIndex={0}
@@ -53,8 +53,7 @@ class SamplePage extends Component {
                   />
                 </div>
                 <div className='info'>
-                  <span style={{ fontSize: 12, fontWeight: 'bold' }}>Criador:</span>
-                  <span style={{ fontSize: 12, fontWeight: 'bold' }}>{usuario.nome}</span>
+                  <span style={{ fontSize: 14, fontWeight: 'bold' }}>{usuario.nome}</span>
                   <span>{usuario.email}</span>
                   <span>{usuario.escolaridade && usuario.escolaridade.escolaridade}</span>
                   <span style={{ fontSize: 12, fontStyle: 'italic' }}>Criado em: {moment(usuario.criado_em).format('DD/MM/YYYY')}</span>
