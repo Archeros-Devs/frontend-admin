@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Badge, Spinner } from 'react-bootstrap';
+import { Row, Col, Badge, Spinner, Modal } from 'react-bootstrap';
 import Card from '../../App/components/Card/Index'
 
 import api from '../../api'
@@ -17,7 +17,10 @@ class SamplePage extends Component {
     id_pasta: this.props.match.params.id_pasta,
     pasta: {},
     imgs: [],
-    loading: true
+    loading: true,
+    modal_motivo: false,
+    avaliacao: null,
+    motivo: ""
   }
 
   componentDidMount() {
@@ -41,14 +44,16 @@ class SamplePage extends Component {
       })
   }
 
-  avaliar = (id_pasta, avaliacao) => {
+  avaliar = () => {
+    const {pasta, avaliacao, motivo} = this.state
+    const id_pasta = pasta.id_pasta
     try {
       api().put(`/pastas/${id_pasta}/avaliar`, {
-        avaliacao
+        avaliacao, motivo
       })
         .then(res => {
           console.info(res)
-          this.setState({ pasta: { ...this.state.pasta, avaliacao: avaliacao } })
+          this.setState({ pasta: { ...this.state.pasta, avaliacao: avaliacao }, modal_motivo:false })
         })
         .catch(error => {
           console.error(error)
@@ -58,8 +63,17 @@ class SamplePage extends Component {
     }
   }
 
+  adicionarMotivo = (avaliacao) => {
+    this.setState({avaliacao, modal_motivo: true})
+
+  }
+
+  handleClose = () => {
+    this.setState({modal_motivo: false })
+  }
+
   render() {
-    const { pasta, loading } = this.state;
+    const { pasta, loading, modal_motivo } = this.state;
     return (
       <Aux>
         <Card
@@ -73,8 +87,8 @@ class SamplePage extends Component {
           onCardReload={() => { }}
           cardHeaderRight={
             <div>
-              <button onClick={() => this.avaliar(pasta.id_pasta, +1)} style={{ ...pasta.avaliacao === 1 ? { background: '#28a745', color: 'white', borderColor: '#28a745' } : {} }} className={`btn-peruibe btn`}>Aprovar</button>
-              <button onClick={() => this.avaliar(pasta.id_pasta, -1)} style={{ ...pasta.avaliacao === -1 ? { background: '#dc3545', color: 'white', borderColor: '#dc3545' } : {} }} className={`btn-peruibe_r btn`}>Reprovar</button>
+              <button onClick={() => this.adicionarMotivo(+1)} style={{ ...pasta.avaliacao === 1 ? { background: '#28a745', color: 'white', borderColor: '#28a745' } : {} }} className={`btn-peruibe btn`}>Aprovar</button>
+              <button onClick={() => this.adicionarMotivo(-1)} style={{ ...pasta.avaliacao === -1 ? { background: '#dc3545', color: 'white', borderColor: '#dc3545' } : {} }} className={`btn-peruibe_r btn`}>Reprovar</button>
             </div>
           }>
           <div className='my-container'>
@@ -121,7 +135,17 @@ class SamplePage extends Component {
                 </div>
               </div>}
           </div>
-        </Card>
+          <Modal show={modal_motivo} onHide={this.handleClose} animation={false}>
+            <Modal.Header closeButton>
+              <Modal.Title>Motivo</Modal.Title>
+            </Modal.Header>
+            <textarea style={{margin:10, width: "96%", }} onChange = {(t) => this.setState({motivo: t.target.value})} class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <Modal.Footer>
+              <button variant="secondary" onClick={this.handleClose}>Fechar</button>
+              <button variant="primary" onClick={this.avaliar}>Salvar</button>
+            </Modal.Footer>
+          </Modal> 
+        </Card>            
       </Aux>
     );
   }

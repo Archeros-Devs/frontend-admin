@@ -150,7 +150,7 @@ class NovaPasta extends React.Component {
                 <Row>
                   <Col md={6}>
                     <Form.Group controlId="exampleForm.localizacao">
-                      <Form.Label>Localizacao</Form.Label>
+                      <Form.Label>Localização</Form.Label>
                       <Autocomplete
                         className='form-control'
                         style={{ width: '100%' }}
