@@ -145,7 +145,6 @@ class SamplePage extends Component {
                     </div>}
                 </div>
               </div>}
-              <label>aksdhjljkashd</label>
           </div>
           <Modal show={modal_motivo} onHide={this.handleClose} animation={false}>
             <Modal.Header closeButton>
