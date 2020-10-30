@@ -17,6 +17,7 @@ class SamplePage extends Component {
     id_pasta: this.props.match.params.id_pasta,
     pasta: {},
     imgs: [],
+    mensagens: [],
     loading: true,
     modal_motivo: false,
     avaliacao: null,
@@ -25,6 +26,7 @@ class SamplePage extends Component {
 
   componentDidMount() {
     this.getFolder()
+    this.getMensagens()
   }
 
   getFolder = () => {
@@ -32,12 +34,23 @@ class SamplePage extends Component {
     api().get(`/pastas/${id_pasta}`)
       .then(({ data, status }) => {
         if (status === 200) {
-          console.info(data)
           this.setState({ pasta: data.pasta, imgs: data.imgs })
         } else {
           console.info(data.msg)
         }
         this.setState({ loading: false })
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  }
+
+  getMensagens = () => {
+    const {id_pasta} = this.state
+    api().get(`/pastas/${id_pasta}/mensagens`)
+      .then(({ data, status }) => {
+        console.log(data)
+        this.setState({ mensagens: [] })
       })
       .catch(error => {
         console.error(error)
@@ -65,7 +78,6 @@ class SamplePage extends Component {
 
   adicionarMotivo = (avaliacao) => {
     this.setState({avaliacao, modal_motivo: true})
-
   }
 
   handleClose = () => {
@@ -106,7 +118,6 @@ class SamplePage extends Component {
                 <div className='col-right'>
                   <div className='my-card card-user'>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                      {console.log(pasta)}
                       <ModalImage
                         images={[pasta.usuario.url_img || profile_image]}
                         displayIndex={0}
@@ -134,6 +145,7 @@ class SamplePage extends Component {
                     </div>}
                 </div>
               </div>}
+              <label>aksdhjljkashd</label>
           </div>
           <Modal show={modal_motivo} onHide={this.handleClose} animation={false}>
             <Modal.Header closeButton>
