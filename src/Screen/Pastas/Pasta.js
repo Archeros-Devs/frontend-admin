@@ -152,8 +152,8 @@ class SamplePage extends Component {
             </Modal.Header>
             <textarea style={{margin:10, width: "96%", }} onChange = {(t) => this.setState({motivo: t.target.value})} class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             <Modal.Footer>
-              <button variant="secondary" onClick={this.handleClose}>Fechar</button>
-              <button variant="primary" onClick={this.avaliar}>Salvar</button>
+              <button variant="secondary" onClick={this.handleClose} className="btn-peruibe_r btn">Fechar</button>
+              <button variant="primary" onClick={this.avaliar} className="btn-peruibe btn">Salvar</button>
             </Modal.Footer>
           </Modal> 
         </Card>            
