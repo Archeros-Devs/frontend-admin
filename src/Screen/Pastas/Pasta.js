@@ -13,17 +13,20 @@ import './style.scss'
 import moment from 'moment';
 
 class SamplePage extends Component {
-  state = {
-    id_pasta: this.props.match.params.id_pasta,
-    pasta: {},
-    imgs: [],
-    mensagens: [],
-    loading: true,
-    modal_motivo: false,
-    avaliacao: null,
-    motivo: ""
+  constructor(props){
+    super(props)
+    this.state = {
+      id_pasta: this.props.match.params.id_pasta,
+      pasta: {},
+      imgs: [],
+      mensagens: [],
+      loading: true,
+      modal_motivo: false,
+      avaliacao: null,
+      motivo: ""
+    }
+    console.log(this.state)
   }
-
 
   componentDidMount() {
     this.getFolder()
