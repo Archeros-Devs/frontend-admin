@@ -99,10 +99,6 @@ class TableHomologation extends Component {
                               {moment(pasta.criado_em).format('DD/MM/Y')}
                             </h6>
                           </td>
-                          <td>
-                            <button onClick={() => this.avaliar(pasta.id_pasta, +1)} style={{ ...pasta.avaliacao === 1 ? { background: '#28a745', color: 'white' } : {} }} className={`btn-peruibe btn`}>Aprovar</button>
-                            <button onClick={() => this.avaliar(pasta.id_pasta, -1)} style={{ ...pasta.avaliacao === -1 ? { background: '#dc3545', color: 'white' } : {} }} className={`btn-peruibe_r btn `}>Reprovar</button>
-                          </td>
                         </tr>
                       )
                     }
