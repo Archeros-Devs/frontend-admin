@@ -77,9 +77,10 @@ class SamplePage extends Component {
               <button onClick={() => this.avaliar(pasta.id_pasta, -1)} style={{ ...pasta.avaliacao === -1 ? { background: '#dc3545', color: 'white', borderColor: '#dc3545' } : {} }} className={`btn-peruibe_r btn`}>Reprovar</button>
             </div>
           }>
-          <div className='my-container'>
-            {!!pasta.nome &&
-              <div className='body'>
+          {!!pasta.nome &&
+            <div className='container'>
+
+              <div className='row'>
                 <div className='my-card col-left'>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <h5>Descrição</h5>
@@ -92,7 +93,6 @@ class SamplePage extends Component {
                 <div className='col-right'>
                   <div className='my-card card-user'>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                      {console.log(pasta)}
                       <ModalImage
                         images={[pasta.usuario.url_img || profile_image]}
                         displayIndex={0}
@@ -110,17 +110,35 @@ class SamplePage extends Component {
                       <span style={{ fontSize: 12, fontStyle: 'italic' }}>Criado em: {moment(pasta.usuario.criado_em).format('DD/MM/YYYY')}</span>
                     </div>
                   </div>
+                </div>
+              </div>
 
-                  {!!this.state.imgs.length &&
-                    <div className='my-card card-imgs' style={{ marginTop: '1em' }}>
+              <div className='row'>
+                <div className="col-md-12">
+                  <hr />
+                  <label>Arquivos</label>
+                  {!!this.state.imgs.length
+                    ? <div className='my-card card-imgs' style={{ marginTop: '1em' }}>
                       <ModalImage
                         images={this.state.imgs}
                         displayIndex={0}
                       />
-                    </div>}
+                    </div>
+                    : <div><i>Nenhum arquivo disponível</i></div>}
                 </div>
-              </div>}
-          </div>
+              </div>
+
+              <div className='row'>
+                <div className="col-md-12">
+                  <hr />
+                  <label>Estudos</label>
+                  {!!this.state.estudos?.length
+                    ? <div></div>
+                    : <div><i>Nenhum estudo disponível</i></div>}
+                </div>
+              </div>
+
+            </div>}
         </Card>
       </Aux>
     );
