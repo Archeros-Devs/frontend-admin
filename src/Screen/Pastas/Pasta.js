@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Badge, Modal } from 'react-bootstrap';
 import Card from '../../App/components/Card/Index'
+import { toast } from 'react-toastify';
 
 import api from '../../api'
 import Aux from "../../hoc/_Aux";
@@ -13,7 +14,7 @@ import './style.scss'
 import moment from 'moment';
 
 class SamplePage extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       id_pasta: this.props.match.params.id_pasta,
@@ -22,8 +23,10 @@ class SamplePage extends Component {
       mensagens: [],
       loading: true,
       modal_motivo: false,
+      modal_banir: false,
       avaliacao: null,
-      motivo: ""
+      motivo: "",
+      banimento: 1
     }
     console.log(this.state)
   }
@@ -50,7 +53,7 @@ class SamplePage extends Component {
   }
 
   getMensagens = () => {
-    const {id_pasta} = this.state
+    const { id_pasta } = this.state
     api().get(`/pastas/${id_pasta}/mensagens`)
       .then(({ data, status }) => {
         console.log(data)
@@ -62,7 +65,7 @@ class SamplePage extends Component {
   }
 
   avaliar = () => {
-    const {pasta, avaliacao, motivo} = this.state
+    const { pasta, avaliacao, motivo } = this.state
     const id_pasta = pasta.id_pasta
     try {
       api().put(`/pastas/${id_pasta}/avaliar`, {
@@ -70,7 +73,7 @@ class SamplePage extends Component {
       })
         .then(res => {
           console.info(res)
-          this.setState({ pasta: { ...this.state.pasta, avaliacao: avaliacao }, modal_motivo:false })
+          this.setState({ pasta: { ...this.state.pasta, avaliacao: avaliacao }, modal_motivo: false })
         })
         .catch(error => {
           console.error(error)
@@ -80,17 +83,39 @@ class SamplePage extends Component {
     }
   }
 
+  banir = () => {
+    const { pasta, motivo, banimento } = this.state
+    const id_usuario = pasta.usuario.id_usuario
+    console.log(banimento)
+    if (!motivo)
+      return toast('Digite o motivo', { type: 'error' })
+
+    api().delete(`/usuarios/${id_usuario}`, {
+      data: {
+        dias: banimento, motivo
+      },
+      validateStatus: () => true
+    })
+      .then(({ status, data }) => {
+        if (status !== 200) return toast(data.error, { type: 'error' })
+        return toast('Usuário banido!', { type: 'success' })
+      })
+      .catch(error => {
+        return toast('Falha ao banir usuário!', { type: 'error' })
+      })
+      .finally(this.handleClose)
+  }
 
   adicionarMotivo = (avaliacao) => {
-    this.setState({avaliacao, modal_motivo: true})
+    this.setState({ avaliacao, modal_motivo: true })
   }
 
   handleClose = () => {
-    this.setState({modal_motivo: false })
+    this.setState({ modal_motivo: false, modal_banir: false })
   }
 
   render() {
-    const { pasta, loading, modal_motivo } = this.state;
+    const { pasta, loading, modal_banir, modal_motivo } = this.state;
     return (
       <Aux>
         <Card
@@ -139,6 +164,12 @@ class SamplePage extends Component {
                       <span>{pasta.usuario.email}</span>
                       <span>{pasta.escolaridade}</span>
                       <span style={{ fontSize: 12, fontStyle: 'italic' }}>Criado em: {moment(pasta.usuario.criado_em).format('DD/MM/YYYY')}</span>
+                      {pasta.usuario.tipo_usuario === 0 && <>
+                        {!!pasta.usuario.banido_ate
+                          ? <span style={{ fontSize: 12, fontStyle: 'italic', color: '#dc3545' }}>Banido até: {moment(pasta.usuario.banido_ate).format('DD/MM/YYYY')}</span>
+                          : <button onClick={() => this.setState({ modal_banir: true })} style={{ background: 'white', color: '#dc3545', borderColor: '#dc3545', width: '50%', height: 20, padding: 1 }} className={`btn-peruibe_r btn`}>Banir</button>
+                        }
+                      </>}
                     </div>
                   </div>
                 </div>
@@ -179,6 +210,22 @@ class SamplePage extends Component {
             <Modal.Footer>
               <button variant="secondary" onClick={this.handleClose} className="btn-peruibe_r btn">Fechar</button>
               <button variant="primary" onClick={this.avaliar} className="btn-peruibe btn">Salvar</button>
+            </Modal.Footer>
+          </Modal>
+
+          <Modal show={modal_banir} onHide={this.handleClose} animation={false}>
+            <Modal.Header closeButton>
+              <Modal.Title>Banir usuário</Modal.Title>
+            </Modal.Header>
+            <select onChange={(e) => this.setState({ banimento: e.target.value })} class="form-control" style={{ margin: 10, width: "96%", }}>
+              <option value={1}> 1 dia</option>
+              <option value={7}> 1 semana</option>
+              <option value={1000}> Indefinido</option>
+            </select>
+            <textarea style={{ margin: 10, width: "96%", }} onChange={(t) => this.setState({ motivo: t.target.value })} class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <Modal.Footer>
+              <button variant="secondary" onClick={this.handleClose} className="btn-peruibe_r btn">Fechar</button>
+              <button variant="primary" onClick={this.banir} className="btn-peruibe btn">Salvar</button>
             </Modal.Footer>
           </Modal>
         </Card>

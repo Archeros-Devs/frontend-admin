@@ -26,7 +26,7 @@ class SignUp extends React.Component {
 
     state = {
         email: 'archeros.devs@gmail.com',
-        senha: '123',
+        senha: '',
         persistEmail: false,
         loading: false
     }
@@ -135,7 +135,7 @@ class SignUp extends React.Component {
                                     />
                                 </div>**/}
                                 {/*<p className="mb-2 text-muted">Esqueceu a senha? <NavLink to="/auth/reset-password-1">Recuperar</NavLink></p>*/}
-                                <p className="mb-0 text-muted">Não tem uma conta? <NavLink to="/auth/signup">Inscrever-se</NavLink></p>
+                                {/*<p className="mb-0 text-muted">Não tem uma conta? <NavLink to="/auth/signup">Inscrever-se</NavLink></p>*/}
                             </div>
                         </div>
                     </div>

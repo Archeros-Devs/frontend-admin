@@ -63,7 +63,7 @@ class NovaPasta extends React.Component {
 
     if (erros.length > 0) return
 
-    Api().post('/pastas', { nome, discussao, categorias: [categoria], descricao, localizacao })
+    Api().post('/pastas', { nome, discussao, categorias: [categoria], descricao, localizacao, latitude: 0, longitude: 0 })
       .then(({ status, data }) => {
         console.log(status, data)
         if (status !== 200) {
